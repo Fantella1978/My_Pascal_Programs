@@ -1,0 +1,70 @@
+{ Compiler directives for Turbo Pascal 7.0 }
+{$A+,B-,D-,E-,F-,I-,L-,N-,O-,P+,Q-,R-,S-,T-,V-,X+}
+ {$G-}
+{$M 16384,0,655360}
+
+unit FLIUnit;
+
+{ FastVGA v1.0, (C)1993 by Tal Cohen }
+
+interface
+
+ uses FastVGA;
+
+ const NormalDelay = 65535;
+       NoDelay     = 0;
+
+       NoExit      = 0;
+       EscExits    = 1;
+       AnyKeyExits = 2;
+
+       Once        = False;
+       Loop        = True;
+
+       OnPage1     = True;
+       OnPage2     = False;
+
+       FLIFile     = 1;
+       FLCFile     = 2;
+
+ procedure GetFlicData (Name:String; var FlicType:Byte; var Delay:Word;
+                        var Frames:Word; var FineRes:Boolean);
+
+ procedure PlayFlic (Name:String; Delay:Word; CanExit:Byte; Looping:Boolean;
+                     var ReturnError:Byte);
+           { Plays a complete FLI or FLC file }
+
+ procedure StartFlic (var F:File; Name:String; FirstPage,Looping:Boolean;
+                      var ReturnError:Byte);
+           { Loads the first frame of an FLI or FLC file }
+
+ procedure AdvanceFlic (var F:File; var ReturnError:Byte);
+           { Advances a frame of an FLI or FLC file }
+
+ procedure CloseFlic (var F:File; var ReturnError:Byte);
+           { Closes an active FLI or FLC file }
+
+ procedure LoadFlicFrame (Name:String; Frame:Word; var ReturnError:Byte);
+           { Loads a single frame from a FLI or FLC file }
+
+ procedure LoadFlicFramePage2 (Name:String; Frame:Word; var Pal:PaletteType;
+                               var ReturnError:Byte);
+           { Loads a single frame from a FLI or FLC file to Page2 }
+
+ procedure LoadFlicPalette (Name:String; Pal:PaletteTypePtr;
+                            var ReturnError:Byte);
+           { Load the palette of the flic file's first frame. Make it
+             active if Pal is nil }
+
+{ Returned errors: 1 - File not found
+                   2 - File close error
+                   3 - I/O read error or file corrupted
+                   4 - Not a flic file or incorrect flic type
+                   5 - Flic file not in 320x200x256 mode
+                   6 - Out of memory
+                   7 - Not an active flic file
+                   8 - No such frame in flic file
+                  99 - A key was used to exit
+                 100 - End of animation reached (file closed)
+                 101 - Loop restarted (file not closed) }
+

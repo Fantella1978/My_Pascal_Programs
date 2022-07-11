@@ -1,0 +1,22 @@
+{ Compiler directives for Turbo Pascal 7.0 }
+{$A+,B-,D-,E-,F-,I+,L-,N-,O-,P+,Q-,R-,S-,T-,V-,X+}
+{$M 16384,0,655360}
+
+unit SoundGlobals;
+
+{ FastVGA v1.0, (C)1993 by Tal Cohen }
+
+interface
+
+ const TestSound:Byte=0; { 0 = None
+                           2 = Sound Blaster 1.x
+                           3 = Sound Blaster 2.0 or later
+                           4 = Sound Blaster Pro (any version) }
+
+ const SBPort:Word = $220; { Base Port for Sound Blaster }
+       SBIRQ:Word  = 7;    { Sound Blaster IRQ number }
+       SBDMA:Word  = 1;    { Sound Blaster DMA channel }
+
+ procedure ResetSB;
+           { Reset the Sound Blaster card }
+

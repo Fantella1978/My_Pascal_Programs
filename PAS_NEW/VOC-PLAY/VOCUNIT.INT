@@ -1,0 +1,47 @@
+{ Compiler directives for Turbo Pascal 7.0 }
+{$A+,B-,D-,E-,F-,I+,L-,N-,O-,P+,Q-,R-,S-,T-,V-,X+}
+{$M 16384,0,655360}
+
+unit VOCUnit;
+
+{ FastVGA v1.0, (C)1993 by Tal Cohen }
+
+interface
+
+  const VOCPlaying:Boolean = False;
+        LastVOCError:Byte  = 0;
+        LastVOCText:String = '';
+        LastVOCMarker:Word = $FFFF;
+
+        Once = False;
+        Loop = True;
+
+        NoExit      = 0;
+        EscExits    = 1;
+        AnyKeyExits = 2;
+
+  procedure PlayVOC(FName:String; CanExit:Byte; Looping:Boolean;
+                    var ReturnError:Byte);
+            { Plays a VOC from a file. }
+
+  procedure MemPlayVOC(VOCPtr:Pointer; CanExit:Byte; Looping:Boolean;
+                       var ReturnError:Byte);
+            { Plays a VOC stored in memory. }
+
+  procedure BackPlayVOC(VOCPtr:Pointer; Looping:Boolean;
+                        var ReturnError:Byte);
+            { Plays a VOC stored in memory, in the background. }
+            { AVAILABLE IN REGISTERED VERSION ONLY. }
+
+  procedure StopVOC;
+            { Stops the VOC playing in the background. }
+
+{ Returned errors: 1 - File not found
+                   2 - File close error
+                   3 - I/O read error or file corrupted
+                   4 - Not a VOC file or unknown block type
+                   5 - Sound board does not support this VOC file
+                   6 - Not enough memory or memory allocation error
+                   7 - VOC file packed
+                 255 - Background playing requires registered version }
+

@@ -1,0 +1,452 @@
+
+
+                  ////  The Servants of Technology
+                  oo/   Reality Engineering
+                  \/    We Think, Therefore You Are
+
+
+                    The Music Programmer's Toolkit
+               An Easy Turbo Pascal Interface to the Ear.
+
+
+
+  CONTENTS
+
+   Contents..........................................................x
+   Notes.............................................................x
+   OverView..........................................................x
+   Soundcards and Soundcard Objects..................................x
+     SoundDevice.....................................................x
+     Adlib...........................................................x
+     Soundblaster....................................................x
+   Songs and Song Objects............................................x
+     AbstractSong....................................................x
+     MIDI0Song.......................................................x
+     CMFSong.........................................................x
+   PlayLists and Related Mysteries (The non-OOP stuff)...............x
+   Examples..........................................................x
+     A Simple CMF Player - PLAYCMF.PAS...............................x
+       Setting up a sound device.....................................x
+       Setting up the song...........................................x
+       Playing the song..............................................x
+     A Complex CMF Player - PLAYCMFS.PAS.............................x
+       Setting up multiple sound devices.............................x
+       Playing multiple songs on one sound device....................x
+   Reference.........................................................x
+     AbstractSong....................................................x
+     AddSongToList...................................................x
+     Adlib...........................................................x
+     ChannelTableType................................................x
+     CleanSongList...................................................x
+     CMFHeader.......................................................x
+     CMFInstrumentArray..............................................x
+     CMFSong.........................................................x
+     DecPtr..........................................................x
+     IncPtr..........................................................x
+     Instrument......................................................x
+     IntHandler......................................................x
+     NoteTable.......................................................x
+     pAbstractSong...................................................x
+     pAdlib..........................................................x
+     pCMFSong........................................................x
+     pSoundblaster...................................................x
+     pSoundDevice....................................................x
+     pSoundList......................................................x
+     ReadMidi........................................................x
+     SetTimer........................................................x
+     Soundblaster....................................................x
+     SoundDevice.....................................................x
+     SoundList.......................................................x
+     TestHandler.....................................................x
+   Appendicies : Technical Info......................................x
+       i : The MIDI File Format......................................x
+      ii : The CMF File Format.......................................x
+     iii : Discussions on a proposed Digital-FM File Format..........x
+
+
+  NOTES
+
+  1) This is a BETA version of this code. It has the following KNOWN problems:
+
+     - Not fast enough while playing in background. I'd love to blame this
+       on OOP, but I can't. I'm currently rewriteing portions of the code
+       in ASM, but it's slow going, since I work full time.
+
+     - MIDI0Song isn't completed. See note later on.
+
+     - DOCs arn't up to par. Portions are incomplete, but again, it's a time
+       problem. I will include everything I say I will eventually, but I have
+       to find time.
+
+     - In the same vein, the code isn't fully commented. It's fairly
+       self-explanitory (at least to me :) and shouldn't be TOO hard to
+       follow. Occasionally in the docs I mention refer to the comments, but
+       right now that might not help!
+
+     All info that pertains to the BETA version is marked with a | at the left
+     hand column.
+
+  2) If anyone can help, please do. Any code snippets which would speed
+     anything up would be apreciated, as well as a few other things:
+
+     - A GUS object would be nice. (REALLY nice!)
+
+     - SBPro object for 4-operator/20-voice docs/code(object?). I have found
+       no applicable code/docs on the subject.
+
+     - any other applicable code/hints/docs.
+
+
+  OVERVIEW
+
+  The Music Programmer's Toolkit is a complete set of routines to assist you
+  in adding pusic to your games, demos, presentations and other programs. It
+  is fully Object Oriented in design, and permits changes to come easily.
+
+  The main features of this package are:
+
+    - Complete Adlib/Soundblaster FM chip support without a memory resident
+      driver.
+
+    - Complete song handling, allowing you to load up a song file (ie. MID or
+      CMF) and play it in the background. The ability to play multiple songs
+      at the same time on one or more soundcards at the same time.
+
+| Playing in the background isn't fast enough. It may just be my timer
+| routine, but I don't think so. Any help here would be appreciated!
+
+    - Extensibility. If you want to add the ability to have other soundcards,
+      you simply override the main SoundDevice procedures (Init, NoteOn,
+      NoteOff, SetVolume and SetVoice), and you can plug and go!
+      Also, if you wanted to support another music format, for example, MOD
+      or an SMF-2 MIDI file, you can do it by simply overriding the procedure
+      ProcessEvent in the AbstarctSong object.
+
+
+  SOUNDCARD OBJECTS
+
+
+  SoundDevice
+
+    SoundDevice is the basic building block of all the sound handling
+    routines. It lays out the basic structure of how to build a soundcard. It
+    is not intended to ever be called directly, but rather as a structure for
+    building other soundcards. If you are creating an object for the Gravis
+    Ultrasound or the ProAudioSpectrum in their native modes, this is what
+    you'd want to decend from.
+
+    Here's the object and it's related structures :
+
+ { const }
+ MaxChan  = 31;  { allow up to 32 voices at one time }
+
+ { arrays }
+ ChannelTableType   = ARRAY[0..MaxChan] of boolean;   { channel on/off table }
+
+ { Abstract SoundDevice Object }
+ pSoundDevice  = ^SoundDevice;
+ SoundDevice   = object
+                  channels : ChannelTableType;
+                  present  : boolean;
+                  constructor Init;
+                  procedure NoteOn(chan, freq, octave : integer); virtual;
+                  procedure NoteOff(chan : integer); virtual;
+                  procedure Volume(chan, vol : integer); virtual;
+                  procedure SetVoice(chan : integer; Voice : pointer); virtual;
+                  procedure SetOpMode(mode : byte); virtual;
+                  procedure ResetSD; virtual;
+                  destructor Done;
+                 end;
+
+    CHANNELS is a way to keep track of what voices are on and off at one
+             time.
+
+    PRESENT is set after a call to INIT, and is true if the soundcard is
+            present.
+
+    INIT initializes the soundcard, and sets PRESENT to true if the card is
+         available. It sould also perform any  "reset" the card may require.
+
+    NOTEON turns a note on. CHAN is the channel (or voice), FREQ is the
+           frequency, and OCTAVE is the octave to play it in.
+
+    NOTEOFF turns a channel (specified by CHAN) off.
+
+    VOLUME sets the volume for a channel. CHAN is the channel to change, and
+           VOL is the volume you'd like it to be.
+
+    SETVOICE assigns an instrument to a channel. CHAN is the channel to set,
+             and VOICE is a pointer to the instrument.
+
+    SETOPMODE allows you to set various operating states a card may have. For
+              instance, the Adlib has "percussion" mode and "melodic" mode.
+              Other cards may have similar mode changes, and this allows you
+              to make these changes.
+    RESETSD resets the card (turns off all voices, and re initializes the
+            port, or whatever has to be to reset).
+
+
+
+  Adlib
+
+    This is the main operating object. It implements the full FM-chip
+    11-voice music that is the "standard". Anything that uses the Adlib
+    object can be played on the Adlib family, Soundblaster family, Pro Audio
+    Spectrum, Logitech Soundman, ATI's soundcard, and any soundcard that is
+    specified as "Adlib-Compatible". Note that the Gravis Ultrasound uses
+    software drivers to gain Adlib compatibility, and thus is subject to
+    errors. I don't have a GUS, so I won't be able to program one for awhile,
+    and can't tell you how well this lib works with it.
+
+    Here is the object's layout (all duplicate identifiers with SoundDevice
+    are removed for readability, since they operate the same way for all
+    devices! OOP is FUN!) :
+
+ { Adlib Sound Object }
+ pAdlib        = ^Adlib;
+ Adlib         = object(SoundDevice)
+                  FMPort      : word;
+                  RhythmMode  : boolean;
+                  constructor Init(pt : word);
+                  procedure WriteFM(chip, reg : integer; data : byte);
+                  procedure SetRhythmMode;
+                  procedure SetMelodicMode;
+                 end;
+
+    FMPORT is the port to write to. Most Adlibs are set to have port $388 as
+           the register/status port and $389 as the Data port. Use $388.
+
+    RHYTHMMODE is true if the card is in Rhythmmode. This is used internally.
+    INIT initializes the Adlib for the port specified.
+    WRITEFM sends a command to the Adlib. CHIP is unused right now, and
+            should be 0. REG is the register to set, and DATA is the data to
+            send to the register.
+    SETRHYTHMMODE sets the card up for 11-voice rhythm mode.
+    SETMELODICMODE sets the card up for 9-voice melodic mode.
+
+
+  Soundblaster
+
+    This is a decendant of the Adlib object. It doesn't have anything added
+    to it, since I havn't yet added in digital support. When digital support
+    is added, there will be various new commands, including a way to do
+    "digital-FM", where voices 28,29,30 and 31 would be "digital" voices, and
+    the rest would be FM voices (0-8 FM, 28-31 digital), so you can create a
+    Song (see below) that would play digital sounds as notes (like in MODs).
+    The effect is very effective (listen to the music in Zone66 for an idea
+    as to how it sounds!). But for now, it it exactly the same as the Adlib
+    object, so I won't re-cover it. Use $220 (or whatever) for the Init
+    method.
+
+
+
+  SONGS AND SONG OBJECTS
+
+    A song is a music format, for example MID, CMF, MOD, 669, etc, are all
+    music formats. In each case, they have certain requirements. They need to
+    be able to turn on and of notes, switch voices and set volumes. So, each
+    song is associated with a SoundDevice, to let you do this.
+    Songs need to be PLAYED, PAUSED and STOPPED. They also need to be able to
+    load themselves into memory, and process themselves. So, in order to do
+    this, I created the idea of a SONG object.
+
+
+  AbstractSong
+
+    AbstractSong is to a Song what SoundDevice is to a music card. You
+    shouldn't try to use it, it's just a layout for other songs. In fact, if
+    you DO use it, you'll find yourself getting a runtime error really,
+    REALLY quickly (because of the RunError command placed with such
+    foresight into one of the routines!)
+
+    Here's the object:
+
+ { Abstract Songfile Object }
+ pAbstractSong = ^AbstractSong;
+ AbstractSong  = object
+                  CurrentPtr,
+                  MusicData    : pointer;
+                  MusicStatus  : byte;
+                  DeltaTime    : longint;
+                  Device       : pSoundDevice;
+                  constructor Init(pSc : pSoundDevice);
+                  procedure Play;
+                  procedure Stop;
+                  procedure Pause;
+                  procedure ProcessEvent; virtual;
+                  function IsPlaying : boolean;
+                  function IsPaused : boolean;
+                  destructor Done;
+                 end;
+
+    CURRENTPTR is a pointer to the current location in the music data.
+
+    MUSICDATA is a pointer to the BEGINNING of the music data.
+
+    MUSICSTATUS is a byte (used internally) to determine the state of the
+                song (0 = not playing; 1 = playing; 2 = paused)
+
+    DELTATIME is a counter used to determine the time until the next event.
+              It is basically a delay value.
+
+    DEVICE is a pointer to a SoundDevice. Due to the nature of OOP, you can
+           use a pointer to an object point to all decendants of the object
+           as well, so this will always point to a decendant of SoundDevice
+           (like Adlib or Soundblaster).
+
+    INIT initializes a song. It loads, processes, and preps the song, setting
+         CURRENTPTR, MUSICDATA and DEVICE.
+
+    PLAY starts the song playing in the background.
+
+    STOP stops the song, and resets CURRENTPTR to the beginning.
+
+    PAUSE stops the song, holding the current position.
+
+    PROCESSEVENT is the most important routine, and MUST be overridden. It
+                 deals with the music data, and turns on and off notes, etc,
+                 using the DEVICE.
+
+    ISPLAYING returns TURE is the file is playing and not paused.
+
+    ISPAUSED returns true if the file is paused.
+
+    DONE clears up all the memory used by the music, and does whatever other
+         general cleanup is required (ie. reseting the sound device, turning
+         off voices, etc, etc..)
+
+
+
+  MIDI0Song
+
+    MIDI type SMF-0 is the most basic MIDI file type. MIDI0Song is the
+    implementation of that file type using AbstractSong as a basis. Again,
+    only the important overridden procedures will be discussed.
+
+ pMIDI0Song = ^MIDI0Song;
+ MIDI0Song  = object(AbstractSong)
+               MusicSize   : longint;
+               constructor Init(fn : pathStr; pSc : pSoundDevice);
+               procedure ProcessEvent; virtual;
+               destructor Done;
+              end;
+
+    MUSICSIZE is the actual # of bytes the music data is taking up. This is
+              used internally.
+
+    INIT loads up the file specified by FN, and attaches it to the sound
+         device pointer PSC.
+
+    PROCESSEVENT has been overridden. I really suggest you take a look at how
+                 it's written, to get an idea as to how events work. The code
+                 if pretty well documented, so it shouldn't be too hard to
+                 follow.
+
+    DONE does normal cleanup.
+
+
+|   NOTE: THIS VERSION DOESN'T COMPLETELY SUPPORT MIDI FILES. IT ONLY HAS THE
+|   PROCESSEVENT WRITTEN. INIT and DONE are not complete (since I have no MIDI
+|   files and would rather get the kit running up to par before playing with
+|   adding in new music formats, etc, etc. I do have the specs on it, and will
+|   implement it for the first REAL version.
+
+    The best thing about this implementation of Songs is that you can easily
+    modify this to play Multi-track (SMF-1 or SMF-2) MIDI files by making
+    each track a Song, and placing it in the PlayList (discussed below). I
+    may have already done this by the time you get to this line, but I just
+    realized it now, so I'm typing it in!
+
+  CMFSong
+
+    This is a decendant of MIDI0SONG, since it handles all it's music as if it
+    were a MIDI file, without the same header, and it adds in the instrument
+    data to the file. So, it doesn't override MIDI0SONG.PROCESSEVENT, since it
+    deals with events the EXACT SAME WAY. (Again, OOP is FUN!).
+
+ { CMF Songfile Object }
+ pCMFSong      = ^CMFSong;
+ CMFSong       = object(MIDI0Song)
+                  Header      : CMFHeader;
+                  constructor Init(fn : pathStr; pSc : pSoundDevice);
+                  destructor Done;
+                 end;
+
+    HEADER is the header data of the CMF. It holds boring info like Clock
+           Rate, Music Offsets, etc. Used internally, mostly.
+
+    INIT loads the CMF and assigns it to a soundcard.
+
+    DONE frees the memory used and clears the song.
+
+
+  PLAYLISTS AND RELATED MYSTERIES (THE NON-OOP STUFF)
+
+  Playlists are a linked list of songs that are played at the same time. For
+  instance, you might have a Soundblaster and an LAPC1, and you want to play
+  music out of the LAPC1 and a MOD out of the SB (assuming you had created
+  objects for each of these!), so you'd init both songs and soundcards, and
+  then assign them to the "PlayList", which processes the events as they come.
+  It's a fairly powerful ability (and hopefully will allow you do do some
+  SERIOUS music effects eventually!), but requires a bit of getting used to.
+
+| Ok, ok, so it's not the best DOCs of a PlayList. So kill me. I'll rewrite
+| this when I get a chance. In the meantime, stick to using one (or two) songs
+| at a time. See TEST?.PAS for code examples of how to play a song.
+
+  The following procedures are defined in the code:
+
+.............................................................................
+procedure IncPtr(VAR Marker : Pointer; IncBy : longint);
+
+  This increments a pointer by INCBY. It's used to process the music in
+  memory.
+
+.............................................................................
+procedure DecPtr(VAR Marker : Pointer; DecBy : longint);
+
+  This decrements a pointer by DECBY. It's used to process the music in
+  memory. (yes, I used a copyblock!)
+
+.............................................................................
+procedure SetTimer(t : word);
+
+  This sets the clock rate of the computer. It MIGHT not be perfect : please
+  check it out if you can!
+
+.............................................................................
+function ReadMidi(var marker : pointer) : longint;
+
+  This reads a MIDI variable-length delay time. See the MIDI docs on the
+  format.
+
+.............................................................................
+procedure AddSongToList(VAR plt : pSoundList; Song : pAbstractSong);
+
+  This adds a song to the playlist.
+
+| I havn't tested this -- DON'T USE IT! I hacked it together, and I have no
+| clue as to how it would or wouldn't work. Use the method in the TEST.PAS
+| to "force" the linked list.
+
+.............................................................................
+procedure CleanSongList(plt : pSoundList);
+
+  This clears the playlist.
+
+|  DO NOT USE. SEE ABOVE.
+
+.............................................................................
+procedure TestHandler;
+
+  This is a non-interrupt-based handler that will play the music in
+  foreground. I'm using it to profile where the system is slowing down.
+  It's usable, but requires that you eliminate the last four lines of the
+  initialization code (in the unit, between the BEGIN and the END.)
+
+
+| Well, I have quite a bit of explaining to do... A lot of docs to write. But
+| I'll leave that for the first version of the "release" code. In any case, it
+| ALMOST works... Hopefully with a bit of help it'll be faster and support
+| more soundcards soon... Perhaps I'll write an LAPC1 object as well... *Sigh*
+| So much to do, so little time.

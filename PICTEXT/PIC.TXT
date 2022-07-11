@@ -1,0 +1,211 @@
+                USE HIGH-RESOLUTION TEXT MODE TO VIEW THE PICTURE
+ษออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
+บ,,,:,,,,,:::::::::;::,.,..,,...... ........,::;L;;;LR@W::,,,,,,,,,,,,,,,::,,บ
+บ,,,,,,,::;;;::::;;;,,.. .:;;::,..,,......,..,:;;;;LWHRR:,,,,,,,,,,,,,,,::,,,บ
+บ:,:,,,:::;;:::;:;;::,,,:;:::;;;::,,,,.....,..,;;L;;HWHHW:,,,,,,,,,,,,,,::,,,บ
+บ::L:,,;;;;;:;;:::::,..,,:,:,:::;:::::,,.,...,;:;::L;HR@@:,,,,,,,,,,,,,,:,,,,บ
+บ;:L::;;;::::::::::,..,:::;;;;::::;:::::,,,.,.,,LW::WHWR@L::,:,,,,,,,,,,:,,,:บ
+บ::L:;L;;::::;;;;::,.,::::;L::,,::::;;::;::,,,::;WW:LHWH@H::;,:,,,,,,,:,,,,,,บ
+บ::;;;:;;;::::;;;:,..,.   ..  ,,,::;,:;;;;;;,..::;LL;HWHRRW:::,:,,,,:::,,,,,,บ
+บ:;LL;;;;;;::::::,,..,  .:;:,,,,:;;:::::L;:;,,.,.;LHLWRLWHRW:::,,,,,:::,,,,,,บ
+บ:L:LLL:;;;;:::::,....,:,::,..,,:;;  ..,;W;,..,,,;:;W;LHLH@RW::::,,:::,,,,,,,บ
+บ;L;;LL;;;:::,::,,,,,....,.,,,,,,,:....,:LWL,.,,:,:;;W:HLHHRRHL:::::::,,,,,,,บ
+บ;;;;;;;::,,,,,,,,,,...,.,::,,::,,,..,::,;W;:,.,:;,:;;;L@LHRRRHW;;:::,,,,,,,,บ
+บ;;;;;;::;,,,,,,,,,,,,,,:;LL;;;:,:,,:;,,.:L:::.:,;;;,;;;;HWH@RHWWL;;::,,,:,,,บ
+บ:;;;;;::,:...,:,,,,:::;LHHWL;;::,::. ,,.:;:,::.:;W::,:,;WWW@HHWWWW;:,:,,:,,,บ
+บ::;L;;;L,,.,.,::,.,:;;LWWHHWLLLL;:,..,:.::,,,:,,;;H:,:;;WHHH@RRHHHR,:::::,,,บ
+บ:::;;LL;:,,.,,,:::::;;WWHHHWWWLWL;,,:;:.:,,,:,:,;HWR;,;:;WWWHRHHHHRH,,::,,,,บ
+บ:::;;L;;::,.,,.:;;;;LWWHHHHWWWWWL,;;;;;,:.,,,,::::HH;.:::LLWHR@HRWWM,::::,,:บ
+บ:::;;L;;::::::::;;;LWWWHHHHHHWLWLL;;L:;:; ,.,.:;;L;HH;:;,;LWLHHRW@W@H,,,,,,:บ
+บ::::L;;;;::;;;;:;;LWWWHHHHHWWWWWLL;;;:;:;..,.,,::;LLWW;:,,;LRRRRRR@@M::,,,::บ
+บ:::;;L;;;;:;;::,;LWWHHHHHHHHHWWWLL;;;,:::,..,.,:::LLLLL;;:;;WHRRRHMMW:,,,,::บ
+บ:::;;L;:;::;;:,,LWWWHHHHHHHHHWL;;:::;::,::.. .,.::;;LL;;;:;;WRR@R@RMR::,,,::บ
+บ:::;L;L::,:;,:,.;WWWHHWWWWWWL;,,::,,:::,::,.. .::::;L;;;;;:;WHHR@M@MW:,,,,,:บ
+บ::;;;;;;:,:::.,,:LWHHHWHWHL::,;L;;;;;;;::::,....,:;:;;;;;;;LLWRRR@@@W:,,:,:,บ
+บ:;::;;;::,:::,::,,:WHHHWWL;,::::,,;;;L;;::::,...,,;;:;;;;;;LLWHRR@@MW:;,::::บ
+บ;::;:;;:::;:,,:,,:,,:WWHWL;L:W@H,,:LLL;::;::::,.,.,;::;;:;;LLWHRR@@M@W::;::;บ
+บ:::;:;:;:,,,:,:,, .H:,WHWLLL;HRL;;LWWW;:,,:;;:::,,.,:::;;;;WLLWHRR@@@@W;;:;:บ
+บ::;;:;;;:,,,,:,:. :RW;LHWWLH;LHH;:WWWL;:,,,,,,:::::,:,:::;;;LLWHHR@@@@RL:;:;บ
+บ:::::;;::,:;,:,:.,::;;WHWLLHWW;;WWWWWL;:,,,,:,,:::::,,,,:;;;LLWHHR@@@M@HL;;:บ
+บ::::;;:::::;,::,,,;L;WWHWLLWHHHWHHWWWL;;::,:::,:::,::,,,,:;;LLWWHRR@@@M@R;,:บ
+บ::::;:::;:::,::,,,:LWWWWWLLWWHHHHHWWLL;;;:::::,::;:::::::,:;L;LLWRR@@M@@@W;:บ
+บ,::::::::;::,:::..,LWWWWWLLWHHHHHHHWLL;;:;::::::::;:::,,:::;LLLWHHRR@@MM@R;:บ
+บ,,::::::::::::::,.:LLWWWWLLLWHHHHHWWLL;;:;:,:::::,;;,:;::,::;WWWHHRR@@@@MMHLบ
+บ,,,,,:::;:;;::::,,:;WLWWLLL;LHWHHWWWLL;;:::,:,:;:,:;:,:;;:::;LLLHHRR@@@@@@HHบ
+บ,,,,,,,:;;;;:::::,,,WWWWWLLL;WWWHWWWLL;;;::,,,::::,:,,,:;;;;;LLWWRRR@@@@MM@@บ
+บ:,,,,,,::;;;;::;,,..WWWWL;LLLWWHHWWWLL;;;;:,,,,,:::::,,,:;;;LLWWHRR@RR@@@M@Rบ
+บ,,,,,,::;LL:;:;;:...:WWLLLWLWWWWWWWWLL;;;;::,,:,::,:,.,.,::;L;WWHW@@@@@M@@M@บ
+บ,,,,,,:::;;;;;;;,...,WLWWWWWWWWWWWWWLLL;;;::,,::,::::,,.,:;;LL;HHHRR@@@@MM@Mบ
+บ,,,,:,,,;;;;;;;:,...,,HLWWLWWWWWHWWLLLL;;;::,,,::::;;,...,:WL;;LHHW@@@@@@M@@บ
+บ,,,,,,:::;;;;;::,...,.;L;L:;;LLWWWWLLLL;;;:::,,:::;L;:,,,,::;;;;LHHRR@M@M@@@บ
+บ,,,,,,,,::;;;;::,.,...,L:.;WH;:;WWWLLL;;;::::,:::;;LLL::.,:;::L;LHWHRRMM@M@Mบ
+บ,,,,,,,::;;;;;::,,,,,..;;;;;;;;WWWWLLLL;;::::,,::;;:LW:::,,:;:;;LWHHR@@M@MM@บ
+บ,,,,,,::;;;;;;:::,,,,:,,:;;L;;;LWWLLLL;;:;;:;:,,:;L:;W;,:,::;;:;;WHWH@@MMMR@บ
+บ,,,:,,L,::;;:;:;;::::::.:;LLLWWWWWWLLL;:::;:;::,:,;;::W:::::;;::LHWHR@MMMM@@บ
+บ,,,,,,::::;;;;;;;;;:,,,.,,WWWWWWWWLL;;:::::;:;:;;::;::;;:;:,;:;;;HLHR@@M@M@@บ
+บ,,,:,,,,:;;:;;;;;::;:,,,,.LWWWWWWLL;:::;;;:;:;::,,,:;::;;;;:;;L;;WHHR@@M@@MRบ
+บ,,,,,,,,:;;:;;;;;::::,,,,.:WWWLWL;;;;;:;L:::;:::,,.:::,:;;;;;:;;LLLHRRR@@@@Rบ
+บ,,,,,,,,:L;:;;;;;::::,,:,,;;;LL;:,LLLL;LL:::::::,,.::;:::;;;;:,,LWLR@@@R@@@@บ
+บ:,,,,,:,,W;;;;;;:::::,::.,.:,... ,LLLLLLL;::::,,::,;;;:::;L;:;,,,LWR@H@@@@MMบ
+บ,,,,,,,,,L;:;L;;;::;:,,,., ,,....,LLWWLLL;::::,,,,,::;::::;;;;:::HHH@R@R@@@@บ
+บ:,,,::,,:L:;;;:;;;:;::.....,.,. ,:LLWL;L;;::,,:.,,.,,:,:,,::;:,::HWHRRRR@@MMบ
+บ:,,,,,,,:L;;:;;;;;;::;,.........,;LLLL;;;;::,,,,,,,,:,,,,,::;:::LWWHRRRR@@@Mบ
+บ:::,,,,,:;;:;;;;:;;:::,,,,,.,..,,;LL;;::::::,:,,:,,:::,::,:;:,::LHWWHRRR@@@Mบ
+บ:::,::,:::::;;;;;;:;;,,,:,.,,.,,,;;;;;:::::::::,:;:,,,,:;;;:,,:;LHLWHRHR@@@Mบ
+บ,:::,:,::::;L;;L;:;;:,:,:,,,,,:,;;;;;;:::::::,:::;:::,,::;,,:,:;WW;WHRHR@@@Mบ
+บ:::::;:;::;L;;;;:;L:,,,,::,,:::;LL;L;;;::::::::,::;:::,.:W,.:,L;WWLLHRRRR@@@บ
+บ:::::;WLLLL;;;;;:;;,:,,:,:::;;LLLWLLL;;;:::;::::::;:,;L:LL::::;;WLWWHRR@@@@@บ
+บ::::::;;LLL;;;;;:;:,:::::,;:LLWWWWLLLL;;;:;;:;::::;::,:;;;;,::;;LLWWWHR@@@@@บ
+บ,,,,:::L;;:;:::::;::::::,::,HHWWWWLWLLLL;;;:;;:::::::,:::::;::;LL;WHWHRR@@@Mบ
+บ,,,,,::,,:;;;:::::;::::,,::WWWWWWWWWWWLL;;;;L;::::::,,,:::;,;;;LLLWHHHRRR@@Mบ
+บ,,,,:,,,,;;;;;:::::::::::,:HWHWWWWWWWWLL;;:;;;;;::::,,:::::,L:;WWLWWHHRRR@@Mบ
+บ,,,,,,,,:;;;;;;:::::::::::LWWHHWWWWWWLLL;;::;;;;:::::,:;;::,L;;LLWWWHHRR@@@@บ
+บ,,,,,,,,:LLL;::::::;::::;LLWHHWWWHWWWLLL;;;;;;;;;::::::;L:::L;;;LWWWHHH@@@@Mบ
+บ,,,,,,,,:;;;::::;::;:::;LWLWWWWHWWWWWLLLL;;:;;;:;;:::;:;L;:::;LLWWWHHHRR@@@Mบ
+บ,,,,,,,,:;;:L;:;;;::::;WWWHWWHWWWWWWWWLLL;;;;;;;;;:::::;;;::;LLLWLWHRRR@@@MMบ
+บ,,,,,,,,,;:::::::::::;WWWWWWWHWHWWWWWWLLL;;;;;;;;;:::::;;;;:LLLWWLLRRRHR@@MMบ
+บ,..,,,,,:;:;:;:L,:::LWWWWWWHWWWWWWWWWWLLL;;;;;;;:;;::::;;;;;LLWWLLWH@@R@@@MMบ
+บ,,,,.,,,,::::;L;;;:LWWWWWWWWWHWHWWWWWWLLL;;;;;;;:;::;::::;;;LWHHWWHRR@R@@@MMบ
+บ,,,,.,,,,::::;;:;:LHWHWWWWWWWWWHWWWWWWLLLL;;;;;:::::;:;:;;;;LHHHHHHR@@RR@@MMบ
+บ,,,,,,,,,:::;:::;WWWWWWWWWWWWWWHWWWWWWLLL;;;;;;;;;;;;:;;;;L;LHHHHHRR@@@@@@@Mบ
+บ,,,:,,,,,::,:::;WWWHWWWWWWWWWWWHWHWWWWLLL;;;;;:;;;:;;;;:;W;;LHHHRRRR@@@@MM@Mบ
+บ,,:,,,,.,,::;;LWHHHHHWWWWWWWWWHHWHWWWWWLLL;;;;;;;;;;;;;:LW:LWHHHRRRR@@MM@MMMบ
+บ,,,,,,,.,:::;WHWWHHHWWWWWWWHWWWHWHWWWWWLLL;;;;;;;;;;L;;;WW;LWHRHRRR@@@MM@MMMบ
+บ.,,,,,,,,,:LHHHHHHHHWHWWHWWWWWWWHWWWWWWWLLL;;;;;;;;;L;;LWH;WWHRRRRR@@@MM@MMMบ
+บ,,.,,,::,LHHHHHHHHHHHHWWHWWWWWWWHHWHWWWWLL;L;;;;;;;LLLL;WW:RRRRRR@R@@@@@@@MMบ
+บ,,,,,,,;WHHHHHHHHWHWHWWWHWWWWWHHHHHWWWWWLLLL;;;;L;;WLLL;WWLHHRRRRR@@@@M@@@M@บ
+บ,,,,,:WHHHHHHHHHHHWLWWHWHWWWWWHHHHHHWWWWLLLL;;;;W;LWLLL;WL;WRRR@@@@@MM@MMMM@บ
+บ,::.:WHRHHHHHHHH,.,.:;LWHHWWWHWHHHHHHWWWWLLLL;;LW;LWLLLLWL;WRRRM@@@@M@@MMM@Mบ
+บ:,:;LHHHHHHHHHH;.     .,;WWWWWWWHHHHHWWWWWLLLL;LL;LWLLLWHWWWH@RMR@@@@@@MM@M@บ
+บ:,WLWHHHHHHHRRH:L.. ..,,:,WWWWHHHHHHWWWWWWLLL;;LL;WWLLLWRLHWR@@MRM@@M@@M@MHMบ
+บ:,:LHHHRHHRRH@H,:,,.,,:.,,WWWWWHHHHHWWWWWWLLL;;LL;WLLLLH@LWHR@@@R@@@@M@M@MW@บ
+บ,,,LHRHHRHRRHH: ,,,,,. ,.:WWWHWWHHHHHHWWWWLLL;;LLLWL;;LHWLHRR@@RR@@@@@@MMH@Wบ
+บ,,,WHHHHHHRRHL .,..,,,,..,LWWWWHHHHHHHWWWWLLLL;LLLLL;;LH;:LRRR@W@@R@@@MMMWHRบ
+บ,,,WHHHHHHRRL :.,,,,..,,:,;WWWWHHHHHHWWWWWLLL;;L;LL;:;W@::LH@RRHWRRMM@MMMHWWบ
+บ,,,HHHHHHHHR.,, .,,:.,,,,,;LWWWHHHHHHHWWWWLLLL;L:L,WLLHH:.LL@@@@WRHM@RMMMLL;บ
+บ,,,LWHHHHHWL., ., ,,,LL.,,:;LWWHHHHHHWWWWWWL;;::: ..;LR ,LLW@MRMHHL@RM@R@RWHบ
+บ,,,:WWWHHHW.,.  :,::;,:,:..,:;LWHWWWHWWWWWLL;;:,..@;WR;,;:LLRRRMRHW@HRW@@MW;บ
+บ:::,LWHWWH:.  :.,:;W,::::,..,,::LWWWWWWWWLLL;:..,:.HWH:;::H;MRRMM@WRW@;RHHR;บ
+บ::,,:WWWWL .. ,; .;.L;,:;;LW;.:;L,:,,,,,,:,.......M;LL:,;LL;HHRM@@HHH@L;:L@Hบ
+บ::,,,:LW;,.  :.. :,;,;;:,:;WLWWWL,,::.,,,.....,..:,:;;:;;LL:WRR@@@R@@;@;,:H;บ
+บ:::,,..,,. . ..,:.:,,:,,L:;WWWWWW::;:..,,.....,..H,,L::;L;L;L@R@HR@RMHLH;LL@บ
+บ,::,,,,,,.,.... ,,.,,,,,,,;WLWWWWHHWWWL;::,,,:LM  :;;;:;;:LLWR@HRRH@RWH;L;HLบ
+บ,,,:,,,,,,,,....,.,,,,,,,,;WWWWWHHHHWWWLWWLLL;HH.,;;H::;;,;:LRRHHHHHRLR,HWW:บ
+บ,,:::,,,,,,;,::;;L;;,,,,:.LWWHWWHWWHHWWWWWLLLLH,,:;H:;:;;::;;RWHHW@L:RW;LW;:บ
+บ,,:,::,::,,L;LLWWWWWHHWHW;LWWWWHWHHHWHWWWLLL;LH,:LWW:;:;;::LWL:WLLR,::;,:,:,บ
+บ,,,,,::::,,LLLLWWWWHHHHHHHWWWWWHHHHHWWWWWWL;;LR:;WHW::;;::;LL::;WW;,,,L::,,,บ
+บ,,,,,,,,,,;LLLWWWWHWHHHHHHWWWWWWHHHHWWWWWLLLLWM;;HW;::;;:,::,:,::,:,,,,:,,,:บ
+บ:,,.,...,,LLLWWWWWHHHHHHHHWWWWWWHHHHWWWWWLL;LH@;HWH:::;:::;;,,,:,,,,,,,,::,,บ
+บ,,,.,,..,,WWWWWWWWWWHHHHHHWWWWWWWWWWWWWWWLL;LHWLHH::::;:,:,::,,,;:,,,,,,,,,,บ
+บ::,,,,,.,,WWLWWWWWWHHHHHHHLLWWWWWHHWWWWWLLL;LRLWWH:::;;:,:,:,,:,::::,,,,,,,,บ
+บ:,,.,,,,.:WWLWWWWHHHHHHHHHLWWWWWHHHHWWWWLLL;L@;LWW:::;:,:,,,,:::::::,,,,,,,,บ
+บ:,,.:,,,,LWWWWWWHHHHHHHHHHLWWWWWHHHHWWWWLLL;LMLLH:::;;:,:,,,,:,,::,;,,,,,,,,บ
+บ::,,,,,.,LLWWWWWHHHHHHHHHHLWWWWHHHWHHWWWWLL;WMLLH:;::;,,,,,,::,,:::;:,.,,,,,บ
+บ::,,,,,.,LLWWWWWHWHHHHHHHHWWWWWHHHHHWHWWWLLLWRLWW:::;;,,,,,,,:::::;;:,,,,,,,บ
+บ::,...,,:LLWWWWWHHWHHHHHHHWWWWWHHHHHHWWWWLL;HWLR,:::;:,,::::::::::;::,,,,,,,บ
+บ::,....,:LWWWWWWHHHHHHHHHWWWWWWHHHHHHWWWWLL;RLWR::;;;::::::::::,:;;:::,,,,,,บ
+บ,:,,,,,,:LWWWWWWHHWHHHHHHWWWWWWWHHHHHHWWLLLL@LH::::;;:,:::::::::;;::::,,,,,,บ
+บ,:,:::,,,LWWWWWWWWWHHHHHHWWWWWHHHHHHHHWWLLL;@HR:::;L:::::::::::;;;:::,,,,,,:บ
+บ,,,::,,,,;WWWWWWWWWHHHHHHWWWWWHHHHHHHHWWLLLWMW;:::;L:,::::::::;L;;:::,,,,,,:บ
+บ,,,,,,,,,:WWWWWWWHHHHHHHHWWWWWWHHHHHHHWWLLLWMR::::;L::::::,,::;;:::::,,,,,,:บ
+บ,,..:.,,,,WWHWWWWWWHHHHHWWLWWWWHHHHHHWWWLLLH@;:::;;;::,:::,::;;;::,:,,,:,,,:บ
+บ,,..,..,::LWWWWWWWHHHHWWWWWWWWHWHHHHHWWWLLLRR::::;W:::::::::;;;::::,,:,,,:::บ
+บ,,,,....::WLWWWWWWHHHHHWWWWWWWHWHHHWWWWWLLL@W:::;;W:::::::,:;;:::::,,,,,::::บ
+บ.,,,,,,.,,LLWWWWWWWHHHHWWWWWWWWHHWHWWWWLLLL@::::;WL,,,:,,,:;;;:::::,,,,,,:::บ
+บ,:,,,,,..,,WWWWWWWWHHWWWWWWWWWWWWWWWWWWWLLLM::::LH:,,,,,,,;L;::::,,,,:,:::::บ
+บ,,,,:,,,,,,WWWWWWWHHHWWWWLWWWWWHHWWWWWWLLLW@::::LR,,,,,,,;L;::::,,,,,:,::::;บ
+บ:::::::::::LWWWWWWHHHHWWWLWWWWWWWWWWWWLLLLW@;:;:WH,,,:,,;L;;:::,,,,:::::::;Rบ
+บ:;;:;::::::;WWWWWWWHHHWWWLWWWWWWWWWWWWLLL;H@H:;:WH,::::;L;:::::,,,,:::::::W@บ
+บ::::;:::::::LWWWWWHHHHWWWWWWWWWWWWWWWWLLLLHRR;::WRL::,;L;::::,,,,,::::,,:HH บ
+บ:::::;;;;;;;LLWWWWHHHHWWWWWWWWWWWWWWWWLLLLRWR;:;LRH,,:L;;::::,,:,:::::::LR  บ
+บ:::::::;:;::LWWWWWHHHHHWWWWWWWWWWWWWWWWLLLRL@W;;LRH;;L;;:::,::,:,::::::HH   บ
+บ:::::;:;:;::LWWWWWHHHHHWWWWWWWWWWWWWWWLLLL@W@R;;;WRRL;;::::,::::::::::LW    บ
+บ::::::::::::;LLWWHHHHHHHWWWHWWWLLWWWWWWL;LRW@@WL;LHMW::::,,:::,::::,:W,     บ
+บ::::::::::::LLWWWHHHHHHWWWWHWWLLLWWWWWWLLL@LR@@WLWH@R;:::,,::::::;:;L .     บ
+บ::::::::::,:;LWWWHHHHL;;WHWHWWLLWWWWWWWLLW, ;R@@HWRR@R:,:,:::::;::;W        บ
+บ::::::,,,,,,;LWWWHHH,..WWWWWWWLLWWWWWLL;;R . .:RMRR@@M,:::::::;:;;W         บ
+บ,,,,,,,,,,,,:LWHWHH,: .WWHWHWWWWWWLWWL;LW.., , ,.WR@@@@;:::::;::W.          บ
+บ.,..,.......:;WWWH,,.;LWHWHWWWWWWWWLLLL;H ....   . :,WR,,:;:;;:H            บ
+บ,,,,,,,,,,,.:;WHW.. ;,WWWHHWWWWWWWWWWL;LH.. .,... W,.:::HL::LW:             บ
+บ,,,,,,,.,,,.,;LL.. . ,LWWWWWWWWWWWWWL;;W@ .  .  ..; . , W::,H.            ..บ
+บ,,,,,,,,,,.,,LWW,....;WWWWWWWWWWWWLLL;;LL.   .    .,; .. WL;             .  บ
+บ,,,,,,,,,,,,,LW.. ..,WWWWHHHWWWWWWLL;;;H   ..  .  .. , :  ;                 บ
+บ,,,,,,:,,,,,,L;.,, ..LWWWWHWWWWWWLLL;;;H::,.::...:..,:.    H.               บ
+บ,::,,,,,,,,,:L,,,.,.,WLWWHHHWWWWWLL;;;LH;;L;L;;:;::.,,;.R.,;L.              บ
+บ,,,,:,,:::::,:.,,.,:;WLWHHWHWWWWLLLL;;;;;;;;;LL;LLL;:..; ,.WWH.           ..บ
+บ,,,,:,,,:::,,,.,.::LLWWWHHWWWWWWLL;;;;L:;;;;LLLLWHWW;:,;L ;.WWH.        .,,,บ
+บ,,,,,,,,,,,:,,.,::LLLWWWWWWWWWWWLLL;;LW::;;;LLLLWHHHWW;;   .:H;HL      .,:,,บ
+บ,,,,,,,,,.,:., :;LLWLWWWHWWWWWWWLLL;;;;::;;;LLLWWHHRRRW::,,  ,:LRH    .,,:,,บ
+บ,....,,,,,,.   ;LLLLLWWWHHWWWWWWLLL;;L:::;;;LLLWWWHHRRRR;.  .,W::L@ ..,,,,,,บ
+บ,.,...,.,,,  ..;;LLLWWWWHHWWWWWWLLL;;;:;;;;LLLLWWWWHRR@MRL::.,:,.WHR,:::,,,,บ
+บ,,,..,,,...   ,LLLLLWWWHHHWWWWWWLLL;;;::;;LLLLWLWWWWHHRRMM;; ..  LLMR,::,,..บ
+บ,,,.,,,,...   .;LLLLWWWWHHWWWWWWLLL;;:::;LLLLWWWWWWHHHR@MMM;.....:,:@R,,..  บ
+บ,,,,,,..,...   L;LLLWWWHHHWWWWWLLLL;L:::;LLWWWWWWWWWWHHRRMRR,.   ,.,@RL,.   บ
+บ,,,,,,,,,.,.   ;LLLLWWWHHHWWWWWLLL;;;::;LLWWWWHWWHHHHWHHH@M@R...,,,:@MR..   บ
+บ,,,,,,,.,,,.  .;;LLWWWWHHHWWWWWLLLL;;:;;LWWWWWWWWWWHHWWHHR@MRR. .  .H@@M    บ
+บ,,,,,,,,,,,    ;;LLLWWHHHHWWWWWLLLL;::;LLWWWHWHHHWWHWWWHHHR@MM:.... ,R@MH.. บ
+บ,,,,,,,,,,.    .LLLWWWWHHWWWWWWWLL;;::;LWWWHHHHHHHWHWWWHWHHR@R@ .  .,HRM@,  บ
+บ,,,,,,,,,,, . . ;LLWWWHHHWWWWWWLLL;::;LWWHHHHHHHHHHHHHWHWWHWRM@R.,, .WH@@R. บ
+บ,,,,,,,,,,,     LLLWWWHHHWWWWWWWLL;::;LWHHHHHHHHHHHHHHWWWWWWHRMM.   ,LWR@@, บ
+บ,,,,,,,,,,,.    LLWWWHHHHWWWWWWWLL;:;LWHHHHHHHHHHHHHHHHHHWWWHR@@@.  .LLWR@R บ
+บ,,,,,,.,,,.,,.  WLLWWWHHHWWWWWWWL;::;LWHHHHHHHHHHHHHHHHHHWWWWWR@R ..,LLLH@R บ
+บ,,,,,,,,,,,,,,,.WLWWWHHHWWWWWWWW;;::LWHHHHHHHHHHHHHHHHHHHWWWWWH@@L.,;LLLWR@Rบ
+บ,,.,,,,,,,,..,,:WLWWWHHHWWWWWWWL;::;WHHHHHHHHHHHHHHHHHHHHHHWWWHHMM .;;LLLHR@บ
+บ,,,.,,,,,,...,,;WWWWWHHHWWWWWWLL;,:LWHHHHHRHHHHHHHHHHHHWHWWWWLWH@M .;L;LLL@@บ
+บ.,,........,..,LLWWWHHHWHWWWWW;;:,;WHHHRRHRHHHHHHHHHHHHHHHWWWWWWRM. L;;LLWH@บ
+บ...,..,,,,.,..,LLWWWHHHWWWWWWL;;,;LWHHHHRHHHHHHHHHHHHHHHHHWWWWWWHML.;;;LLLWMบ
+บ,..,.........,,LLWWWHHHWWWWWLL;::;WHHHHHRHHRHHHHHHHHHHHHHHWWWWLLW@M,L;;;LLW@บ
+บ,,,,,,,,,,,,,,,LLWWHHHHWWWWWLL;,;LWHHHHRRHHRHHHHHHHHHHHHHHWWWWWLWRM;;;;;LLLRบ
+บ,,.,,,,,..,,,..LLWWHHHWWWWWWL;,:LWHHRRHRRRRHHRHHHHHHHHHHHHWWWWLLWRM;;;;;;LLRบ
+บ,...,,....,,,,,WWWWHHHWWWWWLL:,;WHHHRHHHRRRHRRRRHHHHHHHHHWWWWLLLWRM;;;;;;LLRบ
+บ.,,,,,,,,,,,,,,WWWHHHHHWWWLL;,;LHHHHHRHRRRRRHHHHHHHHHHHHHHWWWLWLLH@;;;;;;;LHบ
+บ,,,,,,,,,,,,,,;WWWHHHHWWWWLL;:LWHHHRRRRRRRRRHRRRRHHHHHHHHHWWWLLLWH@;;;;;;LLHบ
+บ,,,,,,,,,,,,,,WWWHHHHHWWWLL;,;WWHHHRRHRRRRRRHHHHHHHHHHHHHWWWWLLLLHR;;;;;;;LWบ
+บ,,,,,,,,,,,,,:WWWHHHHHHWWL;,:LHHRRHHRRRRRRHRRHRHHRRHHHHHHWWWWLLLLHR:;;;;;;;Wบ
+บ,,,,,,,,,,,,,;LWWWHHHWWWL;:,;WWHHHHHRRRRRRHRRRHRRRHHHHHHHWWWWLLLLHR;;;;;;;LWบ
+บ,,,,,,,,,,,.,LWWHHHHWWWLL;,:LHHHHHHRRRRRRRRRRRRHHRRHHHHHHWWWWLLLWH@:;;;;;;;Wบ
+บ,,,,,,,,,,,.:WLWHHHWHWWL;,.;WHHHHHHHHHHRRHHHRRRHHHHHHHHHHWWWLLLLLHR;;;;;;;;Lบ
+บ,,,,,,,,,,,.:WWWHHHWWWWL:,:LWHHHHHHHRRRHRRRRRRRRHHHHHHHHHWWWLLLLLHL;;;;;;;;Lบ
+บ,,,,,,,,,,,,;WWHHHHWWWL;,,;LHHHHHHHHHHRHRHHHHHHRHHHHHHHHHWWWLLLLLH:;;;;;;;LLบ
+บ.,,,.,..,.,,LWWHHHWWWLL:.:LWHHHHHHHHHHRHRRHHHHHHHHHHHHHWWWWWLLLLWR:;;;;;;;;Wบ
+บ,,..,,..,,,,WWWHHHWWLL;.,;LHHHHHHHHHHHHRHHHHRRHHHHHHHHWHWWWWWL;LWR:;;;;;;;;Wบ
+บ,,,,.,..,,,,WWHHHHWLL;,.:LWHHHHHHHHHHRHRHHHHHHHHHHHHHHWWWWLLLLLLWL;;;;;;;;;Lบ
+บ,,,,.,,,,,,:WWHHHHLLL:.,;LWHHHHHHHHHHHHRHRHRHHHHHHHHHHWWWWWLLLLWH:;;;;;;::;Wบ
+บ.,,,,,,.,,,;WWWHHWLL;..:LWHHHHHHHHHHHHHHHHRHHHHHHHHHHHHWWWWLLLLWW:;;;;;;;;;Wบ
+บ....,,,,,,,WWHWHHWLL:.,:LWHHHHHHHHHHHHHHHHHHHHHHHHHHHHWWWWLLLLLW:::;;;;;;;LHบ
+บ,,..,,,,,,,WWHHHHWLL,.,:LWHHHHHHHHHHHHHHHHHHHHHHHHHHHWWWLLLLLLWL::;;;;;;;;;Hบ
+บ,,,,,,,,,,,WWWHHHWL;..,;LWHHHHHHHHHHHHHHHHHHHHHHHHHHHHWWLLLLLLW:;:;;;;;;;;;Rบ
+บ,,,,,,.,,.;HWWHHHWL;,.,;LWHHHHHHHHHHHHHHHHHHHHHHHHHWWWWWLLLLLLL:;;::;;;;;:W@บ
+บ,,,,,,.,,,WWWWHHHWL;:.,:LWHHHHHHHHHHHHHHHHHHHHHHHHHHWWWLLL;LLW:::::;;;;::;;;บ
+บ,,,,,,,,,:WWWHHHWWL;,.,:LHHHHHHHHHHHHHHHHHHHHHHHHWWWWWWLLLL;L;:::::;;;;;;;W.บ
+บ,,,,,,,,,;WWWHHHHWW;..,:LWHHHHHHHHHHHHHHHHHHHHHHHHWWWLLLLL;LL::::;;;;;;;;LR,บ
+บ,.,,,,,,:WWWWHHHHWW;..,:LWHHHHHHHHHHHHHHHHHHHHWWWWWWWLLLL;;W::::::::;;;:;L:,บ
+บ...,.,.,LWLWWWHHHWL;...:LWHHHHHHHHHHHHHHHHHHWHWHHWWWLLLL;;L:::::::::::::;H,:บ
+บ......,.LWWWHHHHWWL;..,:;WHHHHHHHHHHHHHHHHHHWHWWWWWWLLLL;LL::::::::;;;:;LR,:บ
+บ,,,,,.,:WWWWWHHHHWL;..,:;WWHHHHHHHHHHHHHHHWWWHWWWWWWLLL;LL:::::::::;;:::W@::บ
+บ,,,,,,,LWWWWWHHHHWL;..,:;WWHHHHHHHHHHHHWHHWWWWWWWWLLLL;LL::::::::::;::;;H:;:บ
+บ,,,,,,,HLWWHHHHHHWL,...:;LWHHHWHHHHHHWWWWWWWWWWWLWLLL;;L:::::::::::;:::LR;;Lบ
+บ......,LWWWWHHHWWW;....:;LWWHHHHWHHWWHWWWWWWWWWWLLLL;;L;,:::::::;;::::;LRWWWบ
+บ  ....LWWWHWWHHWWW; ...:;LWWWHWHWHHWWHWWWWWWWWWLLLL;;;L::::::::::;;:::;W@WWWบ
+บ   ..,WWWWWWWHWHWW; ...:;LWWWWWHHHHWWWWWWWWWWLLLLLL;;L;,::::::::::::::;WWWWWบ
+บ    ..WWHWWWWWWWWL: ...:;LWWHHWWHWWWWWWWWWWWWLLLLL;;;L,::::::::::;::::LHWWWWบ
+บ    .,WWWWWWWWWWWL,...,:;LWWHHWWWWWWWWWWWWWWWLLLL;;;LL,:::::::;;:;;:;:;RLHWWบ
+บ   ...WWLWWWWLWWW;....,:;LWWWHWHWWWWWWWWWWWLLLLLL;;;;;,:::::;;;;;;;;;;LHWHHWบ
+บ  ....;LLWWWWLLHWL....,:;LWWWHWHWWWWWWWWWWWWLLL;;;;;L:::::::;;;;;:;::;WWWWWWบ
+บ,..,,.,WLLLLWWLHWL,...,:;LWWWHWHHWWWWWWWWWLLLLL;;;;;L::::::::::;:::::;HWHHWWบ
+บ,,,,,,,WW;WLHWWHWL;...,:;LWWWWWHWWWWWWWWWLLLLLL;;;;L;::::::::::;::::;LHWHWWWบ
+บ,,.,,,,WWLLWWHWWWLL...,,;LLWWWWWWWWWWWWLLLLLLLL;;;;L:::::::::;;:::::;WHWHWWLบ
+บ,,,,,,,;WL;WLWWLWLL:..,,;;LWWWWWWWWWWWLLLLLLLL;;;;;;,:::::::::::::::;HWWWHWWบ
+บ,.,,,,,,WL;;WLLL;L;L:..,:;LLWWWWWWWWWLWLLLLLL;;;;;;;,:,:::::;;::::::;HWHHWWHบ
+บ..,,,,,,WWL:LLWL;;LLL,.,:;LLWWWWWWWWWLLLLLLLL;;;;;;:::::::;;;;;;;:::LWWWWWWWบ
+บ,,,,,,,,;LL;LLL;;;;;;:.,:;LLWWWWWWWWWLLLLLLL;;;;;;L,::::::::;;:;;:;;WWWWWWWWบ
+บ.,,,,,,.,:;W;;:;;L;;;::.:;LLWWWWWWLWLLLLLLLL;;;;;;:::::::::;;;;:::;LHHWWWWWWบ
+บ,,.,,::,,,:LLL:,:;;;;;;,:;LLWWWWWWWWLLLLLL;;;L;;:;,,:::::::;;;;:::;LHHWWWHLLบ
+บ,,,,::::,,:;LLL:,,;;;;;,:;WWWWWWWWWWLLLLLLLLL;;;;;,,:::::::;;:;;::;LWWWWWHWWบ
+บ,,,,,,,::::;LLL;:,;L;;;:;;LWWWWWWWLWLLLLLLLLL;;;;:,,:::::::;;;;;:;;HWWLLLWWWบ
+บ,,,,,,:,,::LLL;;;:;LLL;:;LWWWWWWWWWWLLLLLLLL;;;;;,,,:::::;;::;::;:;HWWLWWWHWบ
+บ,,:,,,,,,::;LLL;;;;LLLLLLLWWWWWWLWLLLLLLLLLL;;;;;,,:,::::::;;;:::;LWWWWWWWWWบ
+บ::::,,,,,::LLLLLLLLLWWWWWWWWWWWWWWWWLLWLLLLL;;;;:,,,,::::::;;;::::WWWLLWLLWHบ
+บ::::,,,::::;LLLLLLLLWWWWWWWWWWWWWWLLLLLLLLLL;;;;,,,,,::::::;;:::::HWLLLWWWLLบ
+บ,,::,,:::;:;LLLWLLLLLWWWWWWWWWWWWWWWLLLLLLLL;;;:,,,,,::::::;;:::;;WWLLLLWL;Lบ
+ศออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออผ

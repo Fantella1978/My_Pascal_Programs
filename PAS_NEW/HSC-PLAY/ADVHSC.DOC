@@ -1,0 +1,178 @@
+                      H.S.C.  P L A Y E R
+              F O R   T U R B O   P A S C A L   7
+                      FM Music Power !
+
+   H.S.C. Is The Name Of The Format Used By The FM Tracker Of
+   Chicken/ECR. This Unit Allow You To Easily Replay These
+   Module In Your Production Without The Need Of Using Assembler.
+   Even Beginner Should Normaly Able To Use This Piece Of Code (
+   If Not, Return To Your Joystick And Play Doom ;)
+   The Advantage Of The Music is in his Size : A Module Took Only +- 15Ko
+   This is little in comparaison of SoundTracker Module !
+
+   This TPU Contain All The Functions You Need To Replay Correctly HSC Files.
+
+FUNCTION DETECTADLIB(SUGGESTEDPORT:WORD):WORD;
+
+   This Function Tell You About The Presence Of A Compatible
+   Adlib Card In Your System. The Function Return The Base Port Of
+   The Card Or FFh If A Error As Occured During The AutoDetect Process
+   ( No Card For Example :). SUGGESTEDPORT Is Your Suggestion
+   About A Possible Port ( Useful If You Have 2 SoundCards ).
+
+   If SUGGESTEDPORT=0 Then Auto Detection Is Used.
+
+   This Function Is For Your Information Only, The Player Have His Own
+   Adlib Detection Routine.
+
+
+PROCEDURE TOGGLERASTER;
+
+   This Procedure Toggle The Raster Bar At The Top Of The Screen.
+   This Raster Show You The Time Used By The Player To Do His
+   Work. If You Don't Understand :    Try! :)
+
+   The Procedure Works Like A On/Off Switch.
+
+FUNCTION LOADSONG(FILENAME:STRING):BOOLEAN;
+
+##  Now, LOADSONG iS A *FUNCTION* !!!!
+
+   This Function Allocate Memory And Load A SongFile Into
+   Memory.
+
+##  Now, Some Error Checking iS Done : If The File Don't Exist Or
+##  There iS Not Enough Memory To Load The Module, The Function Return
+##  FALSE. If All Was Done Correctly ( Module Loaded) A TRUE iS
+##  Returned.
+
+   FILENAME Is A Valid DOS Filename ( Don't Forget To Include The
+                                            Extension ! )
+
+PROCEDURE CLEARMEM;
+
+   This Procedure De-Allocate Memory Allocated By LOADSONG. You
+   *NEED* To Call This Procedure Before Exiting ! ( Otherwise, Serious
+   Crash Can Occur ! )
+
+N.B. Only Needed If You Have Used The LOADSONG Procedure.
+
+PROCEDURE SETMODE(MODE:BYTE;OLDINT:BYTE);
+
+   This Procedure Setup The Replay Mode Of The Player.
+
+   MODE   = 0  :  The Player Will Use IRQ To Play The Music. ( Default )
+          = 1  :  The Player Need To Be Called Throught The Polling Procedure
+                  This Approach Is Better Is You Use Raster, Scroll Or Other
+                  Things Like That. ( SEE EXAMPLE2.PAS )
+
+   OLDINT = 0  :  The Old Int 1Ch Is Called By The Player ( Probably Used By
+                  Another Program. This is The Default Setting ).
+          = 1  :  Don't Call The Old Interrupt.
+
+PROCEDURE PLAYSONG;
+
+   This Procedure Play The Song Previously Loaded By LOADSONG.
+
+PROCEDURE PLAYSONGMEMORY(SONG:POINTER);
+
+   This Procedure Play A Song Located Somewhere In Memory. SONG
+   Is A 32 Bit Pointer To This Song. Useful If You Have HardCoded
+   The Music In Your Executable With Utility Like BINOBJ Or
+   ZIP2OBJ.
+
+TIPS :  Using BINOBJ ->
+
+     Your MuZik File = MUSIC.HSC
+     Use :
+
+     BINOBJ MUSIC.HSC MUSIC.OBJ MUSICDATA
+
+     In Your Program :
+
+     {$F+}
+     {$L MUSIC.OBJ}
+     Procedure MUSICDATA; External; Far;
+     {$F-}
+
+     To Play Music :
+
+     PLAYSONGMEMORY( @MUSICDATA );
+
+     Great, No ? =)
+
+PROCEDURE POLLMUSIC;
+
+   This Procedure Is Used Only If You Have Put The Player Into
+   POLL Mode ( See The SETMODE Procedure ). It *MUST* Be Called
+   At Least 18 Time Per Second ( More Is Not A Problem ).
+   See Examples For More Information...
+
+PROCEDURE SETUSERIRQ(LINK:BOOLEAN;ROUTINE:POINTER);
+
+   This Procedure Permit To Link The Player Interrupt To A User
+   Own Made Routine. That Will Mean That Each Time The IRQ Is
+   Called, The User Routine Will Be Called Too.  The User Routine
+   Must End With a RETF Instruction. This One iS Great For Making
+   Equalizer For Example.
+
+   Parameters :
+
+   LINK     =  TRUE  :  Call The User Routine
+            =  FALSE :  Don't Call Any User Routine
+
+   ROUTINE           :  A 32 Bit Pointer To The User Routine
+
+   Tips:  To Obtain The Pointer, Use
+
+      SETUSERIRQ(TRUE,@USERIRQ);
+
+      Where USERIRQ Is The Name Of Your Procedure To Call During IRQ.
+
+PROCEDURE FADESONG;
+
+   This Procedure Turn The Volume Down To Produce A Fade Out Of The Music.
+
+   WARNING!  The Procedure Didn't Wait The End Of The Process.
+   So You Need To Wait A Little Before Stopping The Music. A
+   Delay Of 2-3 Seconds Seem To Be Good.
+
+Example :    FADESONG;
+             DELAY(3000);
+             STOPSONG;
+
+PROCEDURE STOPSONG;
+
+   This Procedure Stop All Playing.
+
+   WARNING! Memory Is *NOT* Released. You Must Do It By Calling CLEARMEM.
+
+Tips: You Could Play A Song Again After Stopping... Simply Call
+      PLAYSONG Again :)
+
+PROCEDURE GETPLAYERSTATE;
+
+    This Procedure Give You Some Information About The Playing Of The
+    FM Module. All The Information Are Returned Into A Array Called
+    PLAYERSTATE . Here is the Definition Of The Array :
+
+Type      PlayerStateType = Record
+            Note      : Array[1..9] Of Byte; { Note }
+            Instr     : Array[1..9] Of Byte; { Instrument Number }
+            Equalizer : Array[1..9] Of Byte; { Equalizer Value }
+            Peak      : Array[1..9] Of Byte; { No Music : 0, Music : $FF }
+            Pattern   : Byte; { Current Pattern }
+            Track     : Byte; { Current Track }
+            Position  : Byte; { Current Position }
+            Playing   : Byte; { Is There Music Currently Playing? 0=No,1=Yes }
+          End;
+
+Var PlayerState : PlayerStateType;
+
+    The Variable is Declared INTO The TPU, So You *DON'T* To Do It
+    Yourself. For More Information, See The Example File Called
+    EQUAL.PAS.
+
+FUNCTION SONGSIZE:LONGINT;
+
+         This Function Return The Size In Byte Of The Loaded Song.

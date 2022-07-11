@@ -1,0 +1,68 @@
+      FADE2.PAS   -=-    Turbo Pascal Fading Routine    -=-    By Mike Schutz
+                               November,  1994
+
+            Allrighty, then.  Here's the Fade2 unit.  I've heard from
+        several people, most of you requesting a TPU that supports TP 7.0,
+        and a few requests for a fade in procedure.  Well, you're all set.
+
+            Fade2 has the same old fade out routine that Fade.tpu had, but
+        I've also thrown in GrabPal, Blackout, and FadeIn procedures, which
+        are all used for a nice fading in effect.  Below is an explanation
+        of each, along with the old stuff:
+
+                PROCEDURE GrabPal;
+                Syntax:  GrabPal;
+                Purpose:  GrabPal stores the current palette into a
+                          two-demensional array in the unit.
+
+                PROCEDURE Blackout;
+                Syntax:  Blackout;
+                Purpose:  Blackout does exactally that.  Set's the whole
+                          palette to 0, so the screen is black, even when
+                          something "is there."
+
+                PROCEDURE FadeIn;
+                Syntax:  FadeIn;
+                Purpose:  Must I really explain this?
+            
+                PROCEDURE FadeOut; 
+                Syntax:  FadeOut;
+                Purpose:  This should speak for itself as well.  The 
+                          palette of the screen is sequentially adjusted 
+                          towards zero.  The R, G, and B values are 
+                          decremented until they reach zero.
+
+                PROCEDURE ResetTextMode; 
+                Syntax:  ResetTextMode;
+                Purpose:  Resets to default text mode and palette.
+
+            GrabPal and Blackout must be executed before FadeIn, respectively.
+        FadeIn fades to the palette stored by GrabPal, and if you don't
+        "Blackout," then FadeIn has nothing to do.
+
+            FadeOut doesn't require you to call any procedures prior to it,
+        because it manipulates from the palette instead of to it.
+
+            If you ever do anything that blanks the screen, and you can't
+        seem to correct it, just call ResetTextMode; -- That will always
+        fix everything.
+
+            I've again included an example file, called FADEDEMO.PAS.  Knock
+        yourselves out.
+
+        HEY, WAIT!
+            Before I sign out, I'd like to thank Asphynxia for their tutorial
+        series.  That's where I finally got this fade in thing.  I had my
+        own that never wuite worked right, but then found a working procedure
+        in their demo.  I just hope to make it easier now for those who just
+        want the fade or whatever.
+
+            If, for any odd reason, you want to contact me, try the following
+        Internet email addresses.  I don't know where I'll be in the next
+        year or two, so if one doesn't work, try the next:
+                mschutz@gmu.edu
+                mschutz@cap.gwu.edu
+                mschutz@capaccess.org
+
+        
+        Enjoy yourself.

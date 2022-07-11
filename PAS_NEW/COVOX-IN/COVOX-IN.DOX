@@ -1,0 +1,97 @@
+
+              Very simple scheme of a high quality sound digitizer
+             дддддддддддддддддддддддддддддддддддддддддддддддддддддд
+
+This ADC can be used to digitize sounds using any DAC on LPT. Use the
+CoVoX-IN program (note that it requires EMS). Here's the scheme:
+
+дд (c) 1995 by Solar Designer \ TorNad0 дддддддддддддддддддддддддддддддддддддд
+
+                              здддддддбддддддддбддд< +5V (game port, pin 1)
+                              Ё    R2 Ё        Ё
+                              Ё      за©       Ё
+                              Ё      Ё Ё   VT2 Ё
+                              Ё      юбы     здv©
+                              Ё       цдддддде╢ Ё
+                              Ё   VT1 Ё      юд\ы
+                  + (if DC)   Ё     зд/©       Ё
+                  зддд> >дддддЁддддде╢ Ё       Ё
+  Analog input    Ё        R1 Ё     юдvы       Ё
+  (AC preferable) Ё          за©      Ё        Ё
+                  юддд> >ддд>Ё Ё   R3 Ё     R5 цддд> Comparison result
+                             юбы     за©      за©    (LPT port, pin 12)
+                              Ё      Ё Ё      Ё Ё
+                              Ё      юбы      юбы
+                              Ё       Ё R4 здддЁддд< Covox output
+                              Ё       Ё   за©  Ё
+                              Ё       юдд>Ё Ё  Ё
+                              Ё           юбы  Ё
+                              Ё            Ё   Ё
+                              юддддддддддддадддаддд< GND (LPT port, pin 25)
+
+дддддддддддддддддддддддддддддддддддддддддддддддддддддддддддддддддддддддддддддд
+ VT1 - KT603│, VT2 - ▐416A
+ R1 - 10K, R2 - 5K, R3 - 5K, R4 - 10K, R5 - 1K
+дддддддддддддддддддддддддддддддддддддддддддддддддддддддддддддддддддддддддддддд
+
+ The parts
+ддддддддддд
+You can use any two transistors in the digitizer: one n-p-n and one p-n-p
+(for example, KT315/KT361 or even M▐35/M▐25). High-frequency transistors are
+strongly recommended -- they're working at about 1 MHz when digitizing at
+20 kHz with no delay specified in COVOX-IN.CFG. Remove the R3 resistor if
+your Covox is made using resistors. Remove the R4 resistor if you can supply
+more than the Covox output voltage as the analog input (most resistor Covoxes
+produce 2.5V output and the ones made using chips produce 5V).
+
+You may have to use a transformer on the analog input if your analog device
+produces a very low voltage (less than 1V) or it has a DC output. This will
+also simplify setting zero with the R1 resistor (some devices have capacitors
+on their output). The tranformer used in speakers for the local Moscow radio
+network can be used here if connected as a step up transformer.
+
+Resistor tolerance is not important at all.
+
+ Tuning
+дддддддд
+1. Configure the CoVoX-IN program editing the COVOX-IN.CFG file.
+2. Connect your analog device (don't turn it on) and run the CoVoX-IN program.
+3. Hold the space bar key and make the program show a value of 128 (or near 0
+   if using analog device with DC output) using the R1 resistor and (if
+   required) the R4 resistor.
+4. Turn on the analog device and adjust its volume so that you can hear the
+   sound from your computer's internal speaker. Also look at the values
+   shown when pressing the space bar key and make them use all the range
+   0-255.
+5. Restart the CoVoX-IN program. Now don't press anything for several
+   seconds. Exit the program and look at the recording frequency value.
+   Adjust the delay in COVOX-IN.CFG to record sounds at a reasonable
+   frequency.
+
+You may also have to specify a non-zero delay if you have a very fast
+computer, slow LPT port or you used a low-frequency transistors. In that
+case you will hear a loud noise without using the delay.
+
+ Problems
+дддддддддд
+I managed to record 6 bit sounds at 20 kHz on my 386DX40 (the quality
+seems to be good enough). There was no sense to use 8 bit sounds because
+of the radio signals mixing with the sound -- the scheme is very sensitive
+(try touching the transistors with your hands -- you will hear a loud noise).
+Unfortunately, you can't just use a less sensitive scheme -- it should
+produce at least 3V as the comparison result as soon as the input voltage
+gets higher than the Covox output voltage.
+
+There's another problem: when the input voltage gets higher than 5V the
+comparison result is not always correct. You should normally get a value
+of 255, but you won't. So you have to record sounds at a lower volume so
+that the voltage never gets too high. As a result you use a little less
+values for different voltages than you could use with certain number of
+bits. The only solution I found for this problem is to use an external
+power supply.
+
+There're a lot of things to optimize in the CoVoX-IN program. I didn't do
+it because I didn't see the need -- you can do it yourself if you want. :)
+
+дддддддддддддддддддд
+Solar Designer \ TN0

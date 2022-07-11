@@ -1,0 +1,147 @@
+
+ ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+ ³ Module Player V1.3      (c) 1994,1995 by Lord Excess of Sound Wizards Int. ³
+ ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+
+
+        USING THE SWMP DRIVERS WITH 'TURBO PASCAL 6.0'
+        ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+         First of all you have to unzip the files of the included
+        archive PAS_SDK.ZIP to a location where the pascal compiler can
+        find them. This is either the directory where you keep your
+        source code or even better the Turbo Pascal directory itself.
+        The files you need in any case are:
+
+              MODPLAY.TPU           : main unit
+              MODPLAY.PAS           : source code
+              DETECT.TPU            : fully automatic hardware detection
+              SB_DRV.TPU            : SoundBlaster driver
+              SBP_DRV.TPU           : SoundBlaster Pro driver
+              GUS_DRV.TPU           : Gravis UltraSound driver
+
+         The rest are example files, which can be important to
+        understand things better. Now the only step to link all
+        mod-procedures and functions is to add the following statements
+        after your program heading:
+
+              PROGRAM xxxxx;
+              {$M $4000,0,0}        : This sets the heap size to zero
+                                    : else the drivers cannot alloc memory
+              USES ModPlay;         : include unit ModPlay
+              ...
+              ..
+
+         At program start you have to initialize this unit using the
+        following procedure:
+
+ÚÄÄINIT DRIVERÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+³       PROCEDURE Mod_Init(Driver,Port: WORD; IRQ,DMA: BYTE);
+³         -> Select and initialize driver for sound output
+³
+³            Driver = Detection         (0) :  Port = 0
+³                                              IRQ  = 0
+³                                              DMA  = 0
+³
+³                   = SoundBlaster      (1) :  Port = SB base address ($220..)
+³                                              IRQ  = SB IRQ#
+³                                              DMA  = 1 (always)
+³
+³                   = SoundBlaster_Pro  (2) :  Port = SBP base address
+³                                              IRQ  = SBP IRQ#
+³                                              DMA  = SBP DMA channel
+³
+³                   = Gravis_UltraSound (3) :  Port = GUS base address
+³                                              IRQ  = GF1 IRQ#
+³                                              DMA  = MIDI IRQ# !!
+À
+
+         A very powerful hardware detection is able to detect any
+        supported soundcard with all required settings. So in general
+        the easiest way to init the drivers is:
+
+                MOD_Init(Detection,0,0,0);
+
+
+         If all fails you can override detection and select one of the
+        drivers by yourself, but in this case you have to know (or ask
+        for) the settings of an installed soundcard.
+
+         If you want to know if initialisation was successfull, have a
+        look at the variable Soundcard (WORD), which will contain the
+        output device:
+
+              0:        no sound available
+              1:        SoundBlaster            [ 22.2 kHz mono     ]
+              2:        SoundBlaster Pro        [ 21.7 kHz stereo   ]
+              3:        Gravis UltraSound       [ 44.1 kHz +stereo+ ]
+
+         You do not have to handle this variable. You can also call the
+        driver's subfunctions even if no soundcard was detected,
+        nothing will happen in this case.
+
+         At program end the unit selfrestores any altered interrupt
+        vectors etc.
+
+         The following functions & procedures are available:
+        (Note: The first two procedures are enough to playback a mod !!!)
+
+ÚÄÄLOAD MODULEÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+³       PROCEDURE Mod_Load(FileName: STRING);
+³         -> Stops possible sound output, loads module file into memory,
+³            but does no start playing. If successful the variable
+³            Channels (WORD) will contain the number of channels, else zero.
+À
+ÚÄÄPLAY MODULEÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+³       PROCEDURE Mod_Play(Looping: WORD);
+³         -> Starts playing previously loaded song. If looping is zero,
+³            song is played only once, else continuously.
+À
+ÚÄÄSTOP MODULEÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+³       PROCEDURE Mod_Stop;
+³         -> Stops sound output at once.
+À
+ÚÄÄMAIN VOLUMEÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+³       PROCEDURE Mod_Volume(Volume: BYTE);
+³         -> Changes the driver's main volume setting. Valid values are
+³            between 0 (lowest) and 64 (loudest).
+À
+ÚÄÄSTATUSÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+³       FUNCTION Mod_Status: WORD;
+³         -> Returns 1 if sound is being played, else 0.
+À
+ÚÄÄGET POSITIONÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+³       FUNCTION Mod_Position: WORD;
+³         -> Returns 256*PatternNumber+LineNumber. Can be useful to
+³            syncronize a special graphic effect to the sound.
+À
+ÚÄÄJUMP BACKÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+³       PROCEDURE Mod_Rewind;
+³         -> Decreases current songposition. No effect in first pattern.
+À
+ÚÄÄJUMP FORWARDÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+³       PROCEDURE Mod_Forward;
+³         -> Increases current songposition. No effect in last pattern.
+À
+
+ÚÄÄPEAKSÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+³       PROCEDURE Mod_Peak(VAR Peaks);
+³         -> Updates the array Peaks by copying the driver's volume
+³            setting (0..64) of each channel. The number of channels
+³            can be found in the variable Channels (WORD) and is either
+³            four, six or eight.
+À
+
+
+         In general it remains to be said that you can do as much error
+        checking as you like, but it is not necessary. In a demo or
+        intro for example you do not care if there is sound available
+        to the grafix you produce on the screen (in most cases). But in
+        a player it is evident that you need to have any sounddevice at
+        all to output the sound! The best way is to take a look at the
+        example programs. Have a lot of fun!
+
+
+                                                 Lord Excess in May '95
+

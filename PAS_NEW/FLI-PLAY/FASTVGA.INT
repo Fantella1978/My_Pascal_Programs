@@ -1,0 +1,306 @@
+{ Compiler directives for Borland Pascal 7.0 }
+{$A+,B-,D-,E-,F-,I-,L-,N-,O-,P+,Q-,R-,S-,T-,V-,X+}
+ {$G-}
+{$M 16384,0,655360}
+
+unit FastVGA;
+
+{ FastVGA v1.0, (C)1993 by Tal Cohen }
+
+interface
+
+var TestVGA:Byte;    { 0 = No VGA card, 1 = MCGA, 2 = VGA or better }
+
+const FastVGARegistered = False;  { True in registered version }
+
+const SprXLen = 48;
+      SprYLen = 64;
+
+      PixXLen = 32;
+      PixYLen = 32;
+
+      RGBRed   = 1;
+      RGBGreen = 2;
+      RGBBlue  = 3;
+
+      GetMaxX     = 319;  { Included for BGI compatibility }
+      GetMaxY     = 199;
+      GetMaxColor = 255;
+
+      NormalPut   = 0; { BitBlt Modes for PutImage }
+      CopyPut     = 0;
+      XorPut      = 1;
+      OrPut       = 2;
+      AndPut      = 3;
+      NotPut      = 4;
+      TransPut    = 5;
+
+type VScreen = array [0..199] of array [0..319] of Byte;
+     VScreenPtr = ^VScreen;
+
+     SpriteBitmap = array [1..SprYLen] of array [1..SprXLen] of Byte;
+     SpriteBitmapPtr = ^SpriteBitmap;
+
+     Sprite = record
+               x,y:Integer;
+	       SpriteData:array [1..3078] of Word;
+	      end;
+
+     SpritePtr = ^Sprite;
+
+type PixieBitmap = array [1..PixYLen] of array [1..PixXLen] of Byte;
+     PixieBitmapPtr = ^PixieBitmap;
+
+     Pixie = record
+	      x,y:Integer;
+	      PixieData:array [1..1028] of Word;
+	     end;
+
+     PixiePtr = ^Pixie;
+
+     PaletteType = array [0..255] of array [RGBRed..RGBBlue] of Byte;
+     PaletteTypePtr = ^PaletteType;
+
+var VGAScreen:VScreen absolute $A000:0000;
+    VGAScreenPtr,Page2:VScreenPtr;
+
+const VGAColor:Byte = 15; { Used by PutPixel and Line procedures }
+      LoX:Integer = 319;  { Screen block to be copied by GoMoveSprites }
+      LoY:Integer = 199;
+      HiX:Integer = 0;
+      HiY:Integer = 0;
+
+{ BASIC SCREEN HANDLING }
+
+ procedure GoVGA256;
+	   { Enters the VGA 320x200x256 mode }
+
+ procedure GoVGA256Uncleared;
+	   { Enters the above mode, without clearing the screen }
+
+ procedure ClrVGAScr;
+	   { Clear the graphic screen }
+
+ procedure ClrPage2Scr;
+	   { Clear Page 2 }
+
+ procedure RestoreMode;
+           { Restores the screen mode active before GoVGA256 was called }
+
+{ SYNCRONIZATION }
+
+ procedure HSync;
+           { Wait for horizontal sync }
+
+ procedure VSync;
+           { Wait for vertical sync }
+
+{ BASIC DRAWING }
+
+ procedure PutPixel (x,y:Integer);
+	   { Put pixel on-screen }
+
+ procedure PutPixelPage2 (x,y:Integer);
+	   { Put pixel on page 2 }
+
+ procedure Line (x1,y1,x2,y2:Integer);
+	   { Draws a line on-screen }
+
+ procedure LinePage2 (x1,y1,x2,y2:Integer);
+	   { Same, on page 2 }
+
+ procedure HLine (x1,y1,x2:Integer);
+	   { Draws a horizontal line }
+
+ procedure HLinePage2 (x1,y1,x2:Integer);
+	   { Same, on page 2 }
+
+ procedure VLine (x1,y1,y2:Integer);
+	   { Draws a vertical line }
+
+ procedure VLinePage2 (x1,y1,y2:Integer);
+	   { Same, on page 2 }
+
+ procedure Box (x1,y1,x2,y2:Integer);
+	   { Draws a filled box }
+
+ procedure BoxPage2 (x1,y1,x2,y2:Integer);
+	   { Same, on page 2 }
+
+{ PARTIAL SCROLLING }
+
+ procedure ScrollLeft (x1,y1,x2,y2:Integer);
+           { Scrolls a box to the left }
+
+ procedure ScrollRight (x1,y1,x2,y2:Integer);
+           { Scrolls a box to the right }
+
+ procedure ScrollLeftPage2 (x1,y1,x2,y2:Integer);
+           { Scrolls a box to the left }
+
+ procedure ScrollRightPage2 (x1,y1,x2,y2:Integer);
+           { Scrolls a box to the right }
+
+{ COPYING TO/FROM PAGE 2 }
+
+ procedure CopyToPage2;
+	   { Makes page 2 a carbon copy of the real VGA page }
+
+ procedure CopyFromPage2;
+	   { Makes the VGA page a carbon copy of page 2 }
+
+ procedure CopySpriteFromPage2 (x,y:Integer);
+	   { Copy a sprite-sized block from page 2 to the real VGA page }
+
+ procedure CopyBlockFromPage2 (x1,y1,x2,y2:Integer);
+	   { Copy a block from page 2 to the real VGA page }
+
+ procedure CopyBlockToPage2 (x1,y1,x2,y2:Integer);
+	   { Copy a block to page 2 from the real VGA page }
+
+ procedure GetImage (x1,y1,x2,y2:Integer; var BitMap);
+	   { Saves a bit image of the specific region }
+
+ procedure GetImagePage2 (x1,y1,x2,y2:Integer; var BitMap);
+	   { Saves a bit image of the specific region }
+
+ procedure PutImage (x,y:Integer; var BitMap; BitBlt:Word);
+	   { Puts a bit image onto the screen }
+
+ procedure PutImagePage2 (x,y:Integer; var BitMap; BitBlt:Word);
+	   { Puts a bit image onto the screen }
+
+  function ImageSize (x1,y1,x2,y2:Integer):Word;
+	   { Returns the memory size - in bytes - required for an image }
+
+{ SINGLE-SPRITE MOVING }
+
+ procedure AssignSprite (S:SpritePtr; BMP:SpriteBitmapPtr);
+	   { Assign a bitmap to a sprite variable }
+
+ procedure ReadSpriteBitmap (S:SpritePtr; BMP:SpriteBitmapPtr);
+	   { Reads the bitmap assigned to a sprite }
+
+ procedure PutSprite (S:SpritePtr; x,y:Integer); { ACTS ON BOTH PAGES }
+	   { Puts a sprite image on both pages }
+
+ procedure MoveSprite (S:SpritePtr; dx,dy:Integer); { ACTS ON BOTH PAGES }
+	   { Moves a sprite from his current position }
+
+ procedure MoveSpriteAbs (S:SpritePtr; nx,ny:Integer); { ACTS ON BOTH PAGES }
+	   { Moves a sprite from his current position }
+
+ procedure RemoveSprite (S:SpritePtr); { ACTS ON BOTH PAGES }
+	   { Removes a sprite from the screen }
+
+{ MULTIPLE-SPRITE MOVING }
+
+ procedure ReadyMoveSprites;
+           { Step 1 of sprite-moving when moving several sprites }
+
+ procedure ReadyMoveSprite (S:SpritePtr);
+	   { Step 1 of sprite-moving when moving several sprites, for
+             individual calls for each sprite }
+
+ procedure SetMoveSprite (S:SpritePtr; dx,dy:Integer);
+	   { Step 2 of sprite-moving when moving several sprites }
+
+ procedure SetRemoveSprite (S:SpritePtr);
+	   { Should be called for sprites to be removed when animating
+             multiple sprites }
+
+ procedure GoMoveSprites;
+	   { Step 3 of multiple sprite-moving }
+
+{ COLLISION DETECTION }
+
+  function SpritePixel (S:SpritePtr; x,y:Integer):Boolean;
+           { Returns True if pixel x,y is occupied by S^ }
+
+  function PixiePixel (S:PixiePtr; x,y:Integer):Boolean;
+           { Returns True if pixel x,y is occupied by S^ }
+
+{ SPRITE STAMPING }
+
+ procedure StampSprite (S:SpritePtr; x,y:Integer);
+	   { Stamps a sprite on VGAScreen }
+
+ procedure StampSpritePage2 (S:SpritePtr; x,y:Integer);
+	   { Stamps a sprite on Page 2 }
+
+{ SINGLE-PIXIE MOVING }
+
+ procedure AssignPixie (S:PixiePtr; BMP:PixieBitmapPtr);
+	   { Assign a bitmap to a pixie variable }
+
+ procedure ReadPixieBitmap (S:PixiePtr; BMP:PixieBitmapPtr);
+	   { Reads the bitmap assigned to a pixie }
+
+ procedure PutPixie (S:PixiePtr; x,y:Integer); { ACTS ON BOTH PAGES }
+	   { Puts a pixie image on both pages }
+
+ procedure MovePixie (S:PixiePtr; dx,dy:Integer); { ACTS ON BOTH PAGES }
+	   { Moves a pixie from his current position }
+
+ procedure MovePixieAbs (S:PixiePtr; nx,ny:Integer); { ACTS ON BOTH PAGES }
+	   { Moves a pixie from his current position }
+
+ procedure RemovePixie (S:PixiePtr); { ACTS ON BOTH PAGES }
+	   { Removes a pixie from the screen }
+
+{ MULTIPLE-PIXIE MOVING }
+
+ procedure ReadyMovePixie (S:PixiePtr);
+	   { Step 1 of pixie-moving when moving several pixies, for
+             individual calls for each pixie }
+
+ procedure SetMovePixie (S:PixiePtr; dx,dy:Integer);
+	   { Step 2 of pixie-moving when moving several pixies }
+
+ procedure SetRemovePixie (S:PixiePtr);
+	   { Should be called for pixies to be removed when animating
+             multiple pixies }
+
+{ PIXIE STAMPING }
+
+ procedure StampPixie (S:PixiePtr; x,y:Integer);
+	   { Stamps a pixie on VGAScreen }
+
+ procedure StampPixiePage2 (S:PixiePtr; x,y:Integer);
+	   { Stamps a pixie on Page 2 }
+
+{ PALETTE HANDLING }
+
+ procedure SetActivePalette (P:PaletteType; First,Last:Byte);
+	   { Sets the active palette or part of it }
+
+ procedure GetActivePalette (var P:PaletteType; First,Last:Byte);
+	   { Reads the active palette or part of it }
+
+ procedure PullToPalette (var P:PaletteType; Target:PaletteType;
+			  First,Last:Byte; var Done:Boolean);
+	   { Moves one step towards the Target palette }
+
+  function MaxPull (P,Target:PaletteType; First,Last:Byte):Byte;
+	   { The number of PullToPalette calls it will take to equalize
+	     the specified parts of P and Target }
+
+ procedure FadeToPalette (Target:PaletteType; First,Last:Byte; Time:Word);
+	   { Fades the active screen palette to Target. Time is specified
+	     in clock ticks }
+
+ procedure FadeToRGB (R,G,B:Byte; Time:Word);
+	   { Fades the entire screen to a given RGB value }
+
+ procedure FadeOut (Time:Word);
+	   { Fades the entire screen to black }
+
+ procedure SlidePalette (var P:PaletteType; First,Last:Byte);
+	   { "Slides" the colors on the palette }
+
+ procedure SaveCOL (P:PaletteType; FName:String; var Er:Byte);
+	   { Write palette to COL-format file }
+
+ procedure LoadCOL (var P:PaletteType; FName:String; var Er:Byte);
+	   { Load palette from COL-format file }
+
