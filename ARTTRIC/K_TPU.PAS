@@ -1,469 +1,518 @@
 unit k_tpu;
+
 interface
-uses crt,graph;
-type pozition=object
-		 x,y:integer;
-		 procedure init(coordx,coordy:integer);
-		 function getx:integer;
-		 function gety:integer;
-	  end;
-     ballptr=^ball;
-     ball=object(pozition)
-	 size,col1:word;
-	 mix,miy,max,may,h,dx,rad,da:integer;
-         alpha:real;
-	 p1:pointer;
-	 constructor init(color:word;radius,minx,miny,maxx,maxy:integer);
-	 destructor done;virtual;
-	 procedure show;virtual;
-	 procedure blind;virtual;
-	 procedure jump;virtual;
-     end;
-     v3dptr=^v3d;
-     v3d=object(pozition)
-	 size,col1:word;
-	 m,i,h,l,l2,n,k1,k2:integer;
-	 dsr,ps,l1,k,alpha:real;
-	 p1:pointer;
-	 constructor init(xp,yp,hi,le:integer;color:word);
-	 destructor done;virtual;
-	 procedure show;virtual;
-	 procedure blind;virtual;
-	 procedure jump;virtual;
-	  end;
-	  optionptr=^option;
-	  option=object(pozition)
-		 visible:boolean;
-		 le:integer;
-		 size:word;
-		 str1:string;
-		 p1:pointer;
-		 constructor init(coordx,coordy:integer;strop:string);
-		 destructor done;virtual;
-		 procedure show;virtual;
-		 function mousein(mx,my:integer;lb:boolean):boolean;virtual;
-		 procedure blind;virtual;
-	  end;
-	  windopptr=^windop;
-	  windop=object
-					  x1,x2,y1,y2:integer;
-		 size1:word;
-		 p:pointer;
-		 constructor init(x_1,y_1,x_2,y_2:integer);
-		 destructor done;virtual;
-		 procedure show;virtual;
-		 procedure blind;virtual;
-	  end;
 
+uses
+	crt, graph;
+type
+	pozition = object
+		x, y : integer;
+		procedure init(coordx, coordy : integer);
+		function getx : integer;
+		function gety : integer;
+	end;
+	ballptr = ^ball;
+	ball = object(pozition)
+		size, col1 : word;
+		mix, miy, max, may, h, dx, rad, da : integer;
+		alpha : real;
+		p1 : pointer;
+		constructor init(color : word; radius, minx, miny, maxx, maxy : integer);
+		destructor done; virtual;
+		procedure show; virtual;
+		procedure blind; virtual;
+		procedure jump; virtual;
+	end;
+	v3dptr = ^v3d;
+	v3d = object(pozition)
+		size, col1 : word;
+		m, i, h, l, l2, n, k1, k2 : integer;
+		dsr, ps, l1, k, alpha : real;
+		p1 : pointer;
+		constructor init(xp, yp, hi, le : integer; color : word);
+		destructor done; virtual;
+		procedure show; virtual;
+		procedure blind; virtual;
+		procedure jump; virtual;
+	end;
+	optionptr = ^option;
+	option = object(pozition)
+		visible : boolean;
+		le : integer;
+		size : word;
+		str1 : string;
+		p1 : pointer;
+		constructor init(coordx, coordy : integer; strop : string);
+		destructor done; virtual;
+		procedure show; virtual;
+		function mousein(mx, my : integer; lb : boolean) : boolean; virtual;
+		procedure blind; virtual;
+	end;
+	windopptr = ^windop;
+	windop = object
+		x1, x2, y1, y2 : integer;
+		size1 : word;
+		p : pointer;
+		constructor init(x_1, y_1, x_2, y_2 : integer);
+		destructor done; virtual;
+		procedure show; virtual;
+		procedure blind; virtual;
+	end;
 
-procedure monkey(x,y:word);
-procedure Inter;
-procedure ResetMouse;
-procedure ShowMouse;
-procedure HideMouse;
-procedure GetMouseStatus(var x, y:integer; var lb, rb : boolean);
-procedure SetMousePos(x,y:integer);
-procedure SetMinMaxX ( min, max : integer );
-procedure SetMinMaxY ( min, max : integer );
+Procedure monkey(x, y : word);
+Procedure Inter;
+Procedure ResetMouse;
+Procedure ShowMouse;
+Procedure HideMouse;
+Procedure GetMouseStatus(var x, y:integer; var lb, rb : boolean);
+Procedure SetMousePos(x, y : integer);
+Procedure SetMinMaxX ( min, max : integer );
+Procedure SetMinMaxY ( min, max : integer );
 Procedure zastavka;
-procedure initfunct(a1:string;x:real;var res:real;var code:integer);
+Procedure initfunct(a1 : string; x : real; var res : real; var code : integer);
 Procedure ramka_1;
-Procedure osi_coordinat(aa,ba,ca,da:word;a,b:real;var viewon:boolean;st:string);
+Procedure osi_coordinat(aa, ba, ca, da : word; a, b : real; var viewon : boolean; st : string);
 Procedure winexit;
-Procedure errors(code:integer);
-
+Procedure errors(code : integer);
 
 implementation
-uses dos;
-var r : registers;
+
+uses
+	dos;
+
+var
+	r : registers;
+
 {******************* MOUSE ***********************}
+
 procedure Inter;
 begin
-     intr($33, r);
+	intr($33, r);
 end;
 
 procedure ResetMouse;
 begin
-     r.ax := 0;
-     Inter;
+	r.ax := 0;
+	Inter;
 end;
 
 procedure ShowMouse;
 begin
-     r.ax := 1;
-     Inter;
+	r.ax := 1;
+	Inter;
 end;
 
 procedure HideMouse;
 begin
-     r.ax := 2;
-     Inter;
+	r.ax := 2;
+	Inter;
 end;
 
-procedure  GetMouseStatus(var x, y:integer; var lb, rb : boolean);
+procedure GetMouseStatus(var x, y : integer; var lb, rb : boolean);
 begin
-     r.ax := 3;
-     Inter;
-     x := r.cx + 1;
-     y := r.dx + 1;
-     lb := False; rb := false;
-     if r.bx = 1 then lb := True
-     else if r.bx = 2 then rb := True
-     else if r.bx = 3 then begin lb := true; rb := true; end;
+	r.ax := 3;
+	Inter;
+	x := r.cx + 1;
+	y := r.dx + 1;
+	lb := False; rb := false;
+	if r.bx = 1
+	then lb := True
+	else
+		if r.bx = 2
+		then rb := True
+	else
+		if r.bx = 3
+		then
+			begin
+				lb := true;
+				rb := true;
+			end;
 end;
 
-procedure SetMousePos(x,y:integer);
+procedure SetMousePos(x, y : integer);
 begin
-     r.ax := 4;
-     r.cx:=x;
-     r.dx:=y;
-     Inter;
+	r.ax := 4;
+	r.cx := x;
+	r.dx := y;
+	Inter;
 end;
 
 procedure SetMinMaxX ( min, max : integer );
 begin
-     r.ax := 7;
-     r.cx:=min;
-     r.dx:=max;
-     Inter;
+	r.ax := 7;
+	r.cx := min;
+	r.dx := max;
+	Inter;
 end;
 
 procedure SetMinMaxY ( min, max : integer );
 begin
-     r.ax := 8;
-     r.cx:=min;
-     r.dx:=max;
-     Inter;
+	r.ax := 8;
+	r.cx := min;
+	r.dx := max;
+	Inter;
 end;
 
 {************** pozition ********************}
-procedure pozition.init(coordx,coordy:integer);
+
+procedure pozition.init(coordx, coordy : integer);
 begin
-  x:=coordx;
-  y:=coordy;
+	x := coordx;
+	y := coordy;
 end;
 
-function pozition.getx:integer;
+function pozition.getx : integer;
 begin
-  getx:=x;
+	getx := x;
 end;
 
-function pozition.gety:integer;
+function pozition.gety : integer;
 begin
-  gety:=y;
+	gety := y;
 end;
+
 {**************** v3d ******************}
-constructor v3d.init(xp,yp,hi,le:integer;color:word);
+
+constructor v3d.init(xp, yp, hi, le : integer; color : word);
 begin
-  pozition.init(xp,yp);
-  n:=25;
-  col1:=color;h:=hi;x:=xp;y:=yp;i:=1;l:=le;
-  dsr:=l/n;ps:=l/2*(sqrt(2)-1);l1:=l/2;
-  m:=y+h;
-  l2:=l div 2+round(ps);
-  size:=imagesize(x-l2-1,y-1,x+l2+1,y+h*2+1);
-  getmem(p1,size);
+	pozition.init(xp, yp);
+	n := 25;
+	col1 := color;
+	h := hi;
+	x := xp;
+	y := yp;
+	i := 1;
+	l := le;
+	dsr := l / n;
+	ps := l / 2 * (sqrt(2) - 1);
+	l1 := l / 2;
+	m := y + h;
+	l2 := l div 2 + round(ps);
+	size := imagesize(x - l2 - 1, y - 1, x + l2 + 1, y + h * 2 + 1);
+	getmem(p1, size);
 end;
 
 destructor v3d.done;
 begin
-  blind;
-  freemem(p1,size);
+	blind;
+	freemem(p1, size);
 end;
 
 procedure v3d.show;
 begin
-  getimage(x-l2-1,y-1,x+l2+1,y+h*2+1,p1^);
-  setcolor(col1);
-  k:=ps*sin(i*pi/n);k1:=round(x-l1-k);k2:=round(x+l1+k);
-  line(x,y,k1,m);
-  line(x,y,k2,m);line(k1,m,k2,m);line(x,y,round(x+l1-i*dsr),m);
-  line(x,y+2*h,k1,m);line(x,y+2*h,k2,m);line(x,y+2*h,round(x+l1-i*dsr),m);
-  setlinestyle(3,1,1);
-  line(x,y,round(x-l1+i*dsr),m);
-  line(x,y+2*h,round(x-l1+i*dsr),m);setlinestyle(0,0,0);
+	getimage(x - l2 - 1, y - 1, x + l2 + 1, y + h * 2 + 1, p1^);
+	setcolor(col1);
+	k := ps * sin(i * pi / n);
+	k1 := round(x - l1 - k);
+	k2 := round(x + l1 + k);
+	line(x, y, k1, m);
+	line(x, y, k2, m);
+	line(k1, m, k2, m);
+	line(x, y, round(x + l1 - i * dsr), m);
+	line(x, y + 2 * h, k1, m);
+	line(x, y + 2 * h, k2, m);
+	line(x, y + 2 * h, round(x + l1 - i * dsr), m);
+	setlinestyle(3, 1, 1);
+	line(x, y, round(x - l1 + i * dsr), m);
+	line(x, y + 2 * h, round(x - l1 + i * dsr), m);
+	setlinestyle(0, 0, 0);
 end;
 
 procedure v3d.blind;
 begin
-  putimage(x-l2-1,y-1,p1^,0);
+	putimage(x - l2 - 1, y - 1, p1^, 0);
 end;
 
 procedure v3d.jump;
 begin
-  blind;
-  inc(i);
-  if i>n then i:=1;
-  show;
+	blind;
+	inc(i);
+	if i > n then i := 1;
+	show;
 end;
 
 {**************** ball ******************}
-constructor ball.init(color:word;radius,minx,miny,maxx,maxy:integer);
+
+constructor ball.init(color : word; radius, minx, miny, maxx, maxy : integer);
 begin
-  pozition.init(minx+radius,maxy-radius);
-  randomize;
-  dx:=6; da:=90;
-  rad:=radius; mix:=minx+radius+1;
-  miy:=miny+radius+1; max:=maxx-radius-1;
-  may:=maxy-radius-1; alpha:=0;
-  h:=may-miy; col1:=color;
-  size:=imagesize(x-rad-1,y-rad-1,x+rad+1,y+rad+1);
-  getmem(p1,size);
+	pozition.init(minx + radius, maxy - radius);
+	randomize;
+	dx := 6;
+	da := 90;
+	rad := radius;
+	mix := minx + radius + 1;
+	miy := miny + radius + 1;
+	max := maxx - radius - 1;
+	may := maxy - radius - 1;
+	alpha := 0;
+	h := may - miy;
+	col1 := color;
+	size := imagesize(x - rad - 1, y - rad - 1, x + rad + 1, y + rad + 1);
+	getmem(p1, size);
 end;
 
 destructor ball.done;
 begin
-  blind;
-  freemem(p1,size);
+	blind;
+	freemem(p1, size);
 end;
 
 procedure ball.show;
 begin
-  getimage(x-rad-1,y-rad-1,x+rad+1,y+rad+1,p1^);
-  setcolor(col1);
-  CIRCLE(x,y,rad);
+	getimage(x - rad - 1, y - rad - 1, x + rad + 1, y + rad + 1, p1^);
+	setcolor(col1);
+	CIRCLE(x, y, rad);
 end;
 
 procedure ball.blind;
 begin
-  putimage(x-rad-1,y-rad-1,p1^,0);
+	putimage(x - rad - 1, y - rad - 1, p1^, 0);
 end;
 
 procedure ball.jump;
 begin
-  blind;
-  x:=x+dx;
-  alpha:=alpha+pi/da;
-  if alpha>=pi then
-   begin
-    alpha:=0;
-    da:=60+random(90);
-    h:=round((may-miy)/4+(may-miy)*random*0.75);
-   end;
-  y:=may-round(h*sin(alpha));
-  if y>=may then y:=may;
-  if y<=miy then y:=miy;
-  if (x>=max) then
-   begin
-    dx:=-round(2*random);
-    x:=max;
-   end;
-  if (x<=mix) then
-   begin
-    dx:=round(2*random);
-    x:=mix;
-   end;
-  show;
+	blind;
+	x := x + dx;
+	alpha := alpha + pi / da;
+	if alpha >= pi
+	then
+		begin
+			alpha := 0;
+			da := 60 + random(90);
+			h := round((may - miy) / 4 + (may - miy) * random * 0.75);
+		end;
+	y := may - round(h * sin(alpha));
+	if y >= may then y := may;
+	if y <= miy then y := miy;
+	if (x >= max)
+	then
+		begin
+			dx := -round(2 * random);
+			x := max;
+		end;
+	if (x <= mix)
+	then
+		begin
+			dx := round(2 * random);
+			x := mix;
+		end;
+	show;
 end;
 
-{******************* option ************************************************}
-constructor option.init(coordx,coordy:integer;strop:string);
+{******************* option *******************************}
+constructor option.init(coordx, coordy : integer; strop : string);
 begin
-  pozition.init(coordx,coordy);
-  visible:=false;
-  str1:=strop;
-  le:=length(str1);
-  if x-le*4-7<0 then x:=le*4+7;
-  if y-10<0 then y:=10;
-  size:=imagesize(x-le*4-8,y-11,x+le*4+8,y+11);
-  getmem(p1,size);
+	pozition.init(coordx, coordy);
+	visible := false;
+	str1 := strop;
+	le := length(str1);
+	if x - le * 4 - 7 < 0 then x := le * 4 + 7;
+	if y - 10 < 0 then y := 10;
+	size := imagesize(x - le * 4 - 8, y - 11, x + le * 4 + 8, y + 11);
+	getmem(p1, size);
 end;
 
 destructor option.done;
 begin
-  blind;
-  freemem(p1,size);
+	blind;
+	freemem(p1, size);
 end;
 
-function option.mousein(mx,my:integer;lb:boolean):boolean;
+function option.mousein(mx, my : integer; lb : boolean) : boolean;
 begin
-  if (mx>=x-le*4-4)and(mx<=x+le*4+4)and(my>=y-5)and(my<=y+5)and lb and visible
-   then mousein:=true
-   else mousein:=false;
+	if (mx >= x - le * 4 - 4) and (mx <= x + le * 4 + 4 ) and (my >= y - 5) and (my <= y + 5) and lb and visible
+	then mousein := true
+	else mousein := false;
 end;
 
 procedure option.show;
 begin
-  visible:=true;
-  getimage(x-le*4-8,y-11,x+le*4+8,y+11,p1^);
-  setviewport(x-le*4-7,y-10,x+le*4+7,y+10,false);
-  clearviewport;
-  setviewport(0,0,getmaxx,getmaxy,false);
-  setcolor(8);
-  rectangle(x-le*4-7,y-10,x+le*4+7,y+10);
-  setfillstyle(1,lightgray);
-  floodfill(x,y,8);
-  setcolor(8);
-  line(x-le*4-7,y-10,x-le*4-1,y-5);
-  line(x-le*4-7,y+10,x-le*4-1,y+5);
-  line(x+le*4+7,y-10,x+le*4+1,y-5);
-  line(x+le*4+7,y+10,x+le*4+1,y+5);
-  rectangle(x-le*4-1,y-5,x+le*4+1,y+5);
-  setfillstyle(1,darkgray);
-  floodfill(x+le*4+5,y,8);
-  floodfill(x,y+6,8);
-  setcolor(white);
-  outtextxy(x-le*4+1,y-3,str1);
+	visible:=true;
+	getimage(x - le * 4 - 8, y - 11, x + le * 4 + 8, y + 11, p1^);
+	setviewport(x - le * 4 - 7, y - 10, x + le * 4 + 7, y + 10, false);
+	clearviewport;
+	setviewport(0, 0, getmaxx, getmaxy, false);
+	setcolor(8);
+	rectangle(x - le * 4 - 7, y - 10, x + le * 4 + 7, y + 10);
+	setfillstyle(1, lightgray);
+	floodfill(x, y, 8);
+	setcolor(8);
+	line(x - le * 4 - 7, y - 10, x - le * 4 - 1, y - 5);
+	line(x - le * 4 - 7, y + 10, x - le * 4 - 1, y + 5);
+	line(x + le * 4 + 7, y - 10, x + le * 4 + 1, y - 5);
+	line(x + le * 4 + 7, y + 10, x + le * 4 + 1, y + 5);
+	rectangle(x - le * 4 - 1, y - 5, x + le * 4 + 1, y + 5);
+	setfillstyle(1, darkgray);
+	floodfill(x + le * 4 + 5, y, 8);
+	floodfill(x, y + 6, 8);
+	setcolor(white);
+	outtextxy(x - le * 4 + 1, y - 3, str1);
 end;
 
 procedure option.blind;
 begin
-  visible:=false;
-  putimage(x-le*4-8,y-11,p1^,normalput);
+	visible := false;
+	putimage(x - le * 4 - 8, y - 11, p1^, normalput);
 end;
+
 {****************** windop ************************}
-constructor windop.init(x_1,y_1,x_2,y_2:integer);
+
+constructor windop.init(x_1, y_1, x_2, y_2 : integer);
 begin
-  x1:=x_1;x2:=x_2;y1:=y_1;y2:=y_2;
-  size1:=imagesize(x1-1,y1-1,x2+1,y2+1);
-  getmem(p,size1);
+	x1 := x_1;
+	x2 := x_2;
+	y1 := y_1;
+	y2 := y_2;
+	size1 := imagesize(x1 - 1, y1 - 1, x2 + 1, y2 + 1);
+	getmem(p, size1);
 end;
 
 destructor windop.done;
 begin
-  blind;
-  freemem(p,size1);
+	blind;
+	freemem(p, size1);
 end;
 
 procedure windop.show;
 begin
- getimage(x1-1,y1-1,x2+1,y2+1,p^);
- setviewport(x1,y1,x2,y2,false);
- clearviewport;
- setviewport(0,0,639,479,false);
- setcolor(darkgray);
- rectangle(x1,y1,x2,y2);
- setfillstyle(1,lightgray);
- floodfill(x1+2,y1+2,darkgray);
- rectangle(x1+5,y1+5,x2-5,y2-5);
- line(x1,y1,x1+5,y1+5);
- line(x1,y2,x1+5,y2-5);
- line(x2,y1,x2-5,y1+5);
- setfillstyle(1,darkgray);
- floodfill(x2-2,y2-2,darkgray);
+	getimage(x1 - 1, y1 - 1, x2 + 1, y2 + 1, p^);
+	setviewport(x1, y1, x2, y2, false);
+	clearviewport;
+	setviewport(0, 0, 639, 479, false);
+	setcolor(darkgray);
+	rectangle(x1, y1, x2, y2);
+	setfillstyle(1, lightgray);
+	floodfill(x1 + 2, y1 + 2, darkgray);
+	rectangle(x1 + 5, y1 + 5, x2 - 5, y2 - 5);
+	line(x1, y1, x1 + 5, y1 + 5);
+	line(x1, y2, x1 + 5, y2 - 5);
+	line(x2, y1, x2 - 5, y1 + 5);
+	setfillstyle(1, darkgray);
+	floodfill(x2 - 2, y2 - 2, darkgray);
 end;
 
 procedure windop.blind;
 begin
-  putimage(x1-1,y1-1,p^,normalput);
+	putimage(x1 - 1, y1 - 1, p^, normalput);
 end;
 
 {************************************************}
 Procedure winexit;
-var rk:char;
-    exi:option;
-    m_x,m_y:integer;
-    lb,rb:boolean;
-begin
-  hidemouse;
-  exi.init(395,280,' Ok ');
-  exi.show;
-  showmouse;
-  repeat
-   if keypressed
-    then rk:=upcase(readkey)
-    else rk:=#1;
-   getmousestatus(m_x,m_y,lb,rb);
-   delay(20);
-  until exi.mousein(m_x,m_y,lb) or(rk=#13);
-  hidemouse;
-  exi.done;
-  showmouse;
-end;
-
-Procedure errors(code:integer);
-var w1:windop;
-begin
- w1.init(265,200,510,300);
- w1.show;
- setcolor(red);
- outtextxy(370,221,'ERROR:');
- setcolor(black);
- case code of
-  1..6:outtextxy(334,243,'Syntaxis error.');
-     7:outtextxy(323,243,'Division by zero.');
-     8:outtextxy(312,243,'Error in LN function.');
- end;
- showmouse;
- winexit;
- hidemouse;
- w1.done;
- setminmaxy(1,305);
- setminmaxx(5,140);
- showmouse;
-end;
-
-
-Procedure osi_coordinat(aa,ba,ca,da:word;a,b:real;var viewon:boolean;st:string);
 var
-   k:integer;
-   a1,a2:string[8];
+	rk : char;
+	exi : option;
+	m_x, m_y : integer;
+	lb, rb : boolean;
 begin
-  setviewport(151,16,624,454,true);
-  clearviewport;
-  setviewport(0,0,639,479,true);
-  setcolor(ca);
-  line(163,20,163,220);
-  line(163,240,163,440);
-  outtextxy(160,227,'Y');
-  line(163,20,166,30);
-  line(163,20,160,30);
-  line(163,440,166,430);
-  line(163,440,160,430);
-  line(170,440,385,440);
-  line(405,440,620,440);
-  outtextxy(392,438,'X');
-  line(170,440,180,443);
-  line(170,440,180,437);
-  line(620,440,610,443);
-  line(620,440,610,437);
-  setlinestyle(1,1,1);
-  setcolor(darkgray);
-  for k:=0 to 10 do
-   begin
-    line(300+k*30,350,300+k*30,50);
-    line(300,50+30*k,600,50+30*k);
-   end;
-  setlinestyle(0,0,0);
-  setcolor(black);
-  outtextxy(40,230,'Minimum X: ');
-  outtextxy(40,260,'Maximum X: ');
-  str(a:8:8,a1);
-  str(b:8:8,a2);
-  setcolor(lightgray);
-  for k:=0 to 100 do
-   begin
-    line(40+k,240,40+k,255);
-    line(40+k,270,40+k,285);
-   end;
-  setcolor(blue);
-  outtextxy(40,245,a1);
-  outtextxy(40,275,a2);
-  setcolor(black);
-  outtextxy(45,290,'Minimums Y');
-  outtextxy(45,305,'Maximums Y');
-  setcolor(aa);
-  circle(25,293,3);
-  setcolor(ba);
-  circle(25,308,3);
-  viewon:=false;
-  setcolor(lightgray);
-  for k:=6 to 634 do line(k,460,k,474);
-  setcolor(red);
-  outtextxy(20,464,'FUNCTION : F(x)='+st);
+	hidemouse;
+	exi.init(395, 280, ' Ok ');
+	exi.show;
+	showmouse;
+	repeat
+		if keypressed
+			then rk := upcase(readkey)
+			else rk := #1;
+		getmousestatus(m_x, m_y, lb, rb);
+		delay(20);
+	until exi.mousein(m_x, m_y, lb) or (rk = #13);
+	hidemouse;
+	exi.done;
+	showmouse;
 end;
 
-
-procedure reshenie(a1:string;x:real;var res:real;var code:integer);
-var a2:string[255];
-    str1:string[8];
-    str3:string[10];
-    a,b,y:real;
-    simb:char;
-    skobka,pos1,pos2,l_a2:byte;
-    i,cod:integer;
+Procedure errors(code : integer);
+var
+	w1 : windop;
 begin
- if code=0
+	w1.init(265, 200, 510, 300);
+	w1.show;
+	setcolor(red);
+	outtextxy(370, 221, 'ERROR:');
+	setcolor(black);
+	case code of
+		1..6 : outtextxy(334, 243, 'Syntaxis error.');
+		7 : outtextxy(323, 243, 'Division by zero.');
+		8 : outtextxy(312, 243, 'Error in LN function.');
+	end;
+	showmouse;
+	winexit;
+	hidemouse;
+	w1.done;
+	setminmaxy(1, 305);
+	setminmaxx(5, 140);
+	showmouse;
+end;
+
+Procedure osi_coordinat(aa, ba, ca, da : word; a, b : real; var viewon : boolean; st : string);
+var
+   k : integer;
+   a1, a2 : string[8];
+begin
+	setviewport(151, 16, 624, 454, true);
+	clearviewport;
+	setviewport(0, 0, 639, 479, true);
+	setcolor(ca);
+	line(163, 20, 163, 220);
+	line(163, 240, 163, 440);
+	outtextxy(160, 227, 'Y');
+	line(163, 20, 166, 30);
+	line(163, 20, 160, 30);
+	line(163, 440, 166, 430);
+	line(163, 440, 160, 430);
+	line(170, 440, 385, 440);
+	line(405, 440, 620, 440);
+	outtextxy(392, 438, 'X');
+	line(170, 440, 180, 443);
+	line(170, 440, 180, 437);
+	line(620, 440, 610, 443);
+	line(620, 440, 610, 437);
+	setlinestyle(1, 1, 1);
+	setcolor(darkgray);
+	for k := 0 to 10 do
+		begin
+			line(300 + k * 30, 350, 300 + k * 30, 50);
+			line(300, 50 + 30 * k, 600, 50 + 30 * k);
+		end;
+	setlinestyle(0, 0, 0);
+	setcolor(black);
+	outtextxy(40, 230, 'Minimum X: ');
+	outtextxy(40, 260, 'Maximum X: ');
+	str(a : 8 : 8, a1);
+	str(b : 8 : 8, a2);
+	setcolor(lightgray);
+	for k := 0 to 100 do
+		begin
+			line(40 + k, 240, 40 + k, 255);
+			line(40 + k, 270, 40 + k, 285);
+		end;
+	setcolor(blue);
+	outtextxy(40, 245, a1);
+	outtextxy(40, 275, a2);
+	setcolor(black);
+	outtextxy(45, 290, 'Minimums Y');
+	outtextxy(45, 305, 'Maximums Y');
+	setcolor(aa);
+	circle(25, 293, 3);
+	setcolor(ba);
+	circle(25, 308, 3);
+	viewon := false;
+	setcolor(lightgray);
+	for k := 6 to 634 do line(k, 460, k, 474);
+	setcolor(red);
+	outtextxy(20, 464, 'FUNCTION : F(x)=' + st);
+end;
+
+procedure reshenie(a1 : string; x : real; var res : real; var code : integer);
+var
+	a2 : string[255];
+	str1 : string[8];
+	str3 : string[10];
+	a, b, y : real;
+	simb : char;
+	skobka, pos1, pos2, l_a2 : byte;
+	i, cod : integer;
+begin
+ if code = 0
   then
    begin
     a2:=a1;
